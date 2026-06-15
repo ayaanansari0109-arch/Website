@@ -10014,6 +10014,11 @@ a:focus-visible {
   box-shadow: var(--mu-ring-soft);
 }
 #app:focus { outline: none; }
+
+/* Module track buckets (W!SE Core / Supporting / Enrichment) */
+.mu-pill.mu-track-core { background: #E6F0FF; color: #1D4ED8; border: 1px solid #C9DBFF; }
+.mu-pill.mu-track-support { background: #EAF7EF; color: #047857; border: 1px solid #C5EAD4; }
+.mu-pill.mu-track-enrich { background: #F1F3F8; color: #475569; border: 1px solid #DDE3EE; }
 .mu-sr-only {
   position: absolute;
   width: 1px;
@@ -12661,6 +12666,10 @@ function getFreshGame() {
       return activity;
     }
 
+    const moduleTracks = { m1:"core",m2:"core",m3:"core",m4:"core",m5:"core",m6:"core",m7:"core",m10:"core",m11:"core",m21:"core",m22:"core",m32:"core", m8:"support",m9:"support",m12:"support",m18:"support",m23:"support",m25:"support",m26:"support",m31:"support", m13:"enrich",m14:"enrich",m15:"enrich",m16:"enrich",m17:"enrich",m19:"enrich",m20:"enrich",m24:"enrich",m27:"enrich",m28:"enrich",m29:"enrich" };
+    const trackMeta = { core:{ label:"W!SE Core", cls:"mu-track-core" }, support:{ label:"Supporting", cls:"mu-track-support" }, enrich:{ label:"Enrichment", cls:"mu-track-enrich" } };
+    function moduleTrack(id){ return trackMeta[moduleTracks[id] || "support"]; }
+
     function renderCurriculum() {
       document.getElementById("app").className = "";
       const module = modules.find(m => m.id === selectedModuleId) || modules[0];
@@ -12703,6 +12712,7 @@ function getFreshGame() {
           <p>${completed}/${m.lessons.length} lessons complete</p>
           <div class="mu-progress"><div class="mu-progress-bar" style="width:${pct}%"></div></div>
           <div class="mu-module-meta">
+            <span class="mu-pill ${moduleTrack(m.id).cls}">${moduleTrack(m.id).label}</span>
             <span class="mu-pill">${quizDone ? "Quiz saved" : "Quiz open"}</span>
             <span class="mu-pill">${cardsLearned}/${cardTotal || 0} cards</span>
             <span class="mu-pill">${cta}</span>
