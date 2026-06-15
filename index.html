@@ -10033,6 +10033,76 @@ a:focus-visible {
   border: 0;
 }
 
+/* =========================================================
+   Phase 3 — "Cooler" tasteful motion & accents (fintech)
+   ========================================================= */
+.mu-public-hero .mu-hero-copy h1,
+.mu-dashboard-welcome h1,
+.mu-command-title {
+  background: linear-gradient(120deg, #0B1220 0%, #1D4ED8 52%, #0EA5A0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #1D4ED8;
+}
+
+.mu-command-card::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: 0;
+  background:
+    radial-gradient(closest-side, rgba(37, 99, 235, 0.16), transparent 70%),
+    radial-gradient(closest-side, rgba(16, 185, 129, 0.14), transparent 70%);
+  background-position: 0% 0%, 100% 100%;
+  background-size: 55% 55%, 55% 55%;
+  background-repeat: no-repeat;
+  filter: blur(8px);
+  animation: mu-drift 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.mu-command-card > * { position: relative; z-index: 1; }
+@keyframes mu-drift {
+  0%   { transform: translate3d(-4%, -3%, 0) scale(1); }
+  100% { transform: translate3d(4%, 3%, 0) scale(1.06); }
+}
+
+.mu-progress-bar { position: relative; overflow: hidden; }
+.mu-progress-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.45) 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: mu-sheen 2.6s ease-in-out infinite;
+}
+@keyframes mu-sheen {
+  0%   { transform: translateX(-100%); }
+  60%, 100% { transform: translateX(120%); }
+}
+
+.mu-btn-primary { position: relative; overflow: hidden; }
+.mu-btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -120%;
+  width: 60%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.35), transparent);
+  transform: skewX(-18deg);
+  transition: left 600ms ease;
+  pointer-events: none;
+}
+.mu-btn-primary:hover::before { left: 140%; }
+
+.mu-account-path-card { transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease; }
+.mu-account-path-card:hover { transform: translateY(-3px); box-shadow: var(--mu-shadow-lg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .mu-command-card::after,
+  .mu-progress-bar::after,
+  .mu-btn-primary::before { animation: none !important; }
+}
+
   </style>
 </head>
 <body>
