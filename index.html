@@ -4637,7 +4637,7 @@ textarea:focus-visible {
 
 .mu-account-path-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--mu-space-lg);
   align-items: stretch;
 }
@@ -12091,7 +12091,7 @@ function getFreshGame() {
             <div class="mu-account-hero-copy">
               <div class="mu-pill mu-pill-success">Account access hub</div>
               <h1>Choose how you want to enter MoneyUnlocked</h1>
-              <p>Parents can create child profiles and access codes. Students can enter their code to continue learning. A legacy single-user demo login is still available for quick testing in this browser.</p>
+              <p>Two simple paths: parents create student profiles and access codes, and students enter their code to start or continue learning.</p>
               <div class="mu-account-warning">
                 <span class="mu-trust-dot"></span>
                 <div>
@@ -12105,9 +12105,8 @@ function getFreshGame() {
               <div class="mu-pill">How access works</div>
               <h2 class="mu-command-title">Pick the path that matches your role.</h2>
               <div class="mu-mini-path">
-                <div class="mu-mini-path-item"><strong>Parent / Guardian</strong><span>Manage students</span></div>
-                <div class="mu-mini-path-item"><strong>Student code</strong><span>Claim or return</span></div>
-                <div class="mu-mini-path-item"><strong>Single-user demo</strong><span>Quick testing</span></div>
+                <div class="mu-mini-path-item"><strong>Parent / Guardian</strong><span>Create profiles & codes</span></div>
+                <div class="mu-mini-path-item"><strong>Student</strong><span>Enter your code</span></div>
               </div>
             </aside>
           </section>
@@ -12118,11 +12117,11 @@ function getFreshGame() {
                 <div class="mu-pill mu-pill-success">Recommended for families</div>
               </div>
               <div class="mu-account-icon">P</div>
-              <h2>Parent / Guardian</h2>
-              <p>Create child profiles, generate student access codes, and track learning progress.</p>
-              <p class="mu-helper-text">Best if a parent or guardian wants to manage one or more students.</p>
-              <button class="mu-btn mu-btn-primary" onclick="goToPage('Buy')">Choose demo plan</button>
-              <button class="mu-btn mu-btn-secondary" onclick="goToPage('Parent Setup')">Returning parent — view student codes</button>
+              <h2>I'm a parent or guardian</h2>
+              <p>Create student profiles, get an access code for each student, and track their progress.</p>
+              <p class="mu-helper-text"><strong>New here?</strong> Choose a demo plan to set up your parent account. <strong>Coming back?</strong> Open your saved account to view student codes and progress.</p>
+              <button class="mu-btn mu-btn-primary" onclick="goToPage('Buy')">New parent — choose demo plan</button>
+              <button class="mu-btn mu-btn-secondary" onclick="goToPage('Parent Setup')">Returning parent — view codes & progress</button>
             </article>
 
             <article class="mu-account-path-card">
@@ -12130,52 +12129,11 @@ function getFreshGame() {
                 <div class="mu-pill">Use your code</div>
               </div>
               <div class="mu-account-icon">S</div>
-              <h2>Student With Access Code</h2>
-              <p>Claim your student code or log back in to continue your course progress.</p>
-              <p class="mu-helper-text">Use the code your parent or teacher gave you.</p>
-              <button class="mu-btn mu-btn-secondary" onclick="goToPage('Student Code')">Enter student code</button>
+              <h2>I'm a student</h2>
+              <p>Enter the access code your parent or teacher gave you to start or continue your course.</p>
+              <p class="mu-helper-text"><strong>First time?</strong> Claim your code once. <strong>Coming back?</strong> Log in with your claimed code — both are on the next page.</p>
+              <button class="mu-btn mu-btn-primary" onclick="goToPage('Student Code')">Enter my access code</button>
             </article>
-
-            <article class="mu-account-path-card">
-              <div>
-                <div class="mu-pill">Legacy demo</div>
-              </div>
-              <div class="mu-account-icon">D</div>
-              <h2>Single-User Demo</h2>
-              <p>Try MoneyUnlocked in a simple single-user browser demo.</p>
-              <p class="mu-helper-text">For quick testing without parent/student profiles.</p>
-              <button class="mu-btn mu-btn-ghost" onclick="document.getElementById('single-user-demo-login')?.scrollIntoView({behavior:'smooth', block:'start'})">Open single-user demo</button>
-            </article>
-          </section>
-
-          <section id="single-user-demo-login" class="mu-account-demo-panel">
-            <div class="mu-account-demo-layout">
-              <div>
-                <div class="mu-pill">Old Single-User Demo Login</div>
-                <h2 style="margin-top:10px">Continue with the legacy demo path</h2>
-                <p style="color:var(--mu-text-soft);line-height:1.65">This older path is for one learner testing the course in this browser. Parents with multiple kids should use the Parent / Guardian path above.</p>
-                <div class="mu-account-status">
-                  <strong>Account status:</strong>
-                  <p style="margin:6px 0 0">${accessMessage}</p>
-                </div>
-              </div>
-
-              <form onsubmit="loginUser(event)" class="mu-account-form-grid">
-                <div>
-                  <label>Email</label>
-                  <input id="login-email" class="mu-input input" type="email" required placeholder="student@example.com" value="${escapeHtml(userEmail)}">
-                </div>
-                <div>
-                  <label>Password</label>
-                  <input class="mu-input input" type="password" required placeholder="Enter your password">
-                </div>
-                <div class="mu-public-actions" style="margin-top:4px">
-                  <button class="mu-btn mu-btn-primary" type="submit">Open single-user demo</button>
-                  <button class="mu-btn mu-btn-secondary" type="button" onclick="goToPage('Create Account')">Create demo login</button>
-                  <button class="mu-btn mu-btn-ghost" type="button" onclick="goToPage('Buy')">Choose demo plan</button>
-                </div>
-              </form>
-            </div>
           </section>
         </main>
       `;
@@ -14808,7 +14766,6 @@ function getFreshGame() {
             <div class="mu-progress-metric progress-metric-card"><div class="mu-pill">W!SE-style prep</div><h2>${wisePrep.mock ? `${wisePrep.mock.percent}%` : "—"}</h2><p>${wisePrep.mock ? `Strongest: ${wisePrep.mock.strongest}. Weakest: ${wisePrep.mock.weakest}.` : "No mock exam score saved yet."}</p></div>
           </section>
 
-          ${renderParentProgressSummary()}
           ${renderCompletionPanel()}
 
           <section class="mu-card">
