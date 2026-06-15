@@ -8616,8 +8616,16 @@ textarea::placeholder {
 
 .mu-practice-review-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 14px;
+}
+
+.mu-practice-review-card-feature {
+  border-color: #C9DBFF;
+  background:
+    radial-gradient(420px 220px at 100% 0%, rgba(37, 99, 235, 0.07), transparent 70%),
+    var(--mu-card);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05), 0 16px 36px rgba(37, 99, 235, 0.10);
 }
 
 .mu-practice-workspace {
@@ -11434,7 +11442,7 @@ function getFreshGame() {
       const studentItems = [
         { label: "Dashboard", page: "Dashboard", group: ["Dashboard"] },
         { label: "Learn", page: "Curriculum", group: ["Curriculum"] },
-        { label: "Practice", page: "Tools", group: ["Tools", "Flashcards", "Quiz Review", "Final Game"] },
+        { label: "Practice", page: "Tools", group: ["Tools", "Flashcards", "Quiz Review", "W!SE Prep", "Final Game"] },
         { label: "Progress", page: "Progress", group: ["Progress", "Badges"] },
         { label: "Logout", page: "Logout", logout: true }
       ];
@@ -13319,6 +13327,13 @@ function getFreshGame() {
                 <h3>Take Module Quiz</h3>
                 <p>Open the selected module quiz in a separate quiz page. Quizzes stay out of lesson pages.</p>
                 <div class="mu-dashboard-hub-actions"><button class="mu-btn mu-btn-primary" onclick="openModuleQuiz(selectedModuleId)">Open Quiz Review</button></div>
+              </article>
+              <article class="mu-practice-review-card mu-practice-review-card-feature">
+                <div class="mu-pill mu-pill-success">Test prep</div>
+                <h3>W!SE-style Test Prep</h3>
+                <p>Diagnostic, 9 domain mini-lessons, vocabulary, topic practice, and a 50-question mock exam to review before a school financial literacy assessment.</p>
+                <p class="mu-helper-text">${progress.wisePrep && progress.wisePrep.mock ? `Latest mock score: ${progress.wisePrep.mock.percent}%.` : "No mock exam score yet. W!SE-style practice only — not the official W!SE test."}</p>
+                <div class="mu-dashboard-hub-actions"><button class="mu-btn mu-btn-primary" onclick="goToPage('W!SE Prep')">Open W!SE Prep</button></div>
               </article>
               <article class="mu-practice-review-card">
                 <div class="mu-pill mu-pill-success">Capstone</div>
