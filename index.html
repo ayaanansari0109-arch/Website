@@ -10019,6 +10019,8 @@ a:focus-visible {
 .mu-pill.mu-track-core { background: #E6F0FF; color: #1D4ED8; border: 1px solid #C9DBFF; }
 .mu-pill.mu-track-support { background: #EAF7EF; color: #047857; border: 1px solid #C5EAD4; }
 .mu-pill.mu-track-enrich { background: #F1F3F8; color: #475569; border: 1px solid #DDE3EE; }
+.mu-module-pill-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; }
+.mu-module-pill-row .mu-pill { font-weight: 800; }
 .mu-sr-only {
   position: absolute;
   width: 1px;
@@ -12704,7 +12706,10 @@ function getFreshGame() {
         return `<button class="mu-module-card ${isActive ? "active" : ""} ${isComplete ? "completed" : ""}" onclick="selectModule('${m.id}')">
           <div class="mu-module-card-top">
             <div>
-              <div class="mu-pill ${isComplete ? "mu-pill-success" : isActive ? "mu-pill-warning" : ""}">${isActive ? "Current" : isComplete ? "Completed" : categoryForModule(index)}</div>
+              <div class="mu-module-pill-row">
+                <span class="mu-pill ${moduleTrack(m.id).cls}">${moduleTrack(m.id).label}</span>
+                <div class="mu-pill ${isComplete ? "mu-pill-success" : isActive ? "mu-pill-warning" : ""}">${isActive ? "Current" : isComplete ? "Completed" : categoryForModule(index)}</div>
+              </div>
               <h3>Module ${index + 1}: ${escapeHtml(m.title)}</h3>
             </div>
             <span class="mu-pill">${pct}%</span>
@@ -12712,7 +12717,6 @@ function getFreshGame() {
           <p>${completed}/${m.lessons.length} lessons complete</p>
           <div class="mu-progress"><div class="mu-progress-bar" style="width:${pct}%"></div></div>
           <div class="mu-module-meta">
-            <span class="mu-pill ${moduleTrack(m.id).cls}">${moduleTrack(m.id).label}</span>
             <span class="mu-pill">${quizDone ? "Quiz saved" : "Quiz open"}</span>
             <span class="mu-pill">${cardsLearned}/${cardTotal || 0} cards</span>
             <span class="mu-pill">${cta}</span>
