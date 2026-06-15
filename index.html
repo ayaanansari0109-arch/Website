@@ -11594,7 +11594,7 @@ function getFreshGame() {
                       <span class="mu-pill ${parent.planType === "family" ? "mu-pill-success" : ""}">${parent.planType === "family" ? "Family" : "Group"}</span>
                     </div>
                     <p class="mu-helper-text">${parent.studentIds.length}/${getChildLimit(parent)} child profiles created.</p>
-                    <button class="btn light mu-btn mu-btn-secondary" onclick="openParentDashboard('${parent.parentId}')">Open parent dashboard</button>
+                    <button class="btn light mu-btn mu-btn-secondary" onclick="openParentDashboard('${parent.parentId}')">Open dashboard / view student codes</button>
                   </div>
                 `).join("") || `<div class="mu-empty-state">No saved parent demo accounts in this browser yet.</div>`}
               </div>
@@ -12122,6 +12122,7 @@ function getFreshGame() {
               <p>Create child profiles, generate student access codes, and track learning progress.</p>
               <p class="mu-helper-text">Best if a parent or guardian wants to manage one or more students.</p>
               <button class="mu-btn mu-btn-primary" onclick="goToPage('Buy')">Choose demo plan</button>
+              <button class="mu-btn mu-btn-secondary" onclick="goToPage('Parent Setup')">Returning parent — view student codes</button>
             </article>
 
             <article class="mu-account-path-card">
