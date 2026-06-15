@@ -9738,6 +9738,9 @@ html {
   --mu-grad-primary: linear-gradient(135deg, #2F6BFF 0%, #1D4ED8 100%);
   --mu-grad-ink: linear-gradient(135deg, #0B1220 0%, #111c34 60%, #0b1733 100%);
   --mu-grad-accent: linear-gradient(135deg, #10b981 0%, #2563eb 100%);
+  /* Contrast: nudge muted text to meet WCAG AA on white */
+  --mu-muted: #586273;
+  --muted: #586273;
 }
 
 /* Soft depth on the page background without color shifts */
@@ -9978,9 +9981,47 @@ a:focus-visible {
   .mu-btn, .btn { transition: none !important; }
 }
 
+/* =========================================================
+   Accessibility — keyboard skip link, focus, screen-reader
+   ========================================================= */
+.mu-skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  transform: translateY(-160%);
+  background: var(--mu-primary);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: var(--mu-shadow-md);
+  transition: transform 160ms ease;
+}
+.mu-skip-link:focus,
+.mu-skip-link:focus-visible {
+  transform: translateY(0);
+  outline: none;
+  box-shadow: var(--mu-ring-soft);
+}
+#app:focus { outline: none; }
+.mu-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
   </style>
 </head>
 <body>
+  <a class="mu-skip-link" href="#app">Skip to main content</a>
   <header>
     <div class="nav-wrap">
       <button class="brand" onclick="goToPage('Home')" aria-label="Go to MoneyUnlocked home"><span class="logo">$</span><span>MoneyUnlocked<span class="brand-subtitle">Finance + economics for students</span></span></button>
@@ -9988,7 +10029,7 @@ a:focus-visible {
     </div>
   </header>
 
-  <main id="app"></main>
+  <main id="app" tabindex="-1" aria-label="Main content"></main>
 
   <footer>
     <div class="footer-inner">
@@ -15450,6 +15491,34 @@ function renderParents() {
       console.log("MoneyUnlocked HTML self-tests passed.");
     }
 
+    function enhanceAccessibility() {
+      const app = document.getElementById("app");
+      if (!app) return;
+      // Keep a single main landmark: inner <main> wrappers become styling-only.
+      app.querySelectorAll("main").forEach(m => m.setAttribute("role", "presentation"));
+      // Announce dynamically updated status text to screen readers.
+      app.querySelectorAll(".mu-copy-status, .mu-quiz-score-box").forEach(el => {
+        el.setAttribute("role", "status");
+        el.setAttribute("aria-live", "polite");
+      });
+      app.querySelectorAll(".mu-quiz-feedback, .feedback").forEach(el => {
+        el.setAttribute("aria-live", "polite");
+      });
+      // Expose linear progress tracks as accessible progress bars.
+      app.querySelectorAll(".mu-progress").forEach(track => {
+        const fill = track.querySelector(".mu-progress-bar");
+        if (!fill) return;
+        const pct = Math.max(0, Math.min(100, Math.round(parseFloat(fill.style.width) || 0)));
+        track.setAttribute("role", "progressbar");
+        track.setAttribute("aria-valuemin", "0");
+        track.setAttribute("aria-valuemax", "100");
+        track.setAttribute("aria-valuenow", String(pct));
+        if (!track.getAttribute("aria-label")) {
+          track.setAttribute("aria-label", `Progress: ${pct}%`);
+        }
+      });
+    }
+
     function render() {
       renderNav();
       let html = "";
@@ -15479,6 +15548,7 @@ function renderParents() {
       else if (page === "Login") html = renderLogin();
       document.getElementById("app").innerHTML = html;
       if (page === "Flashcards" && isLoggedIn) renderFlashcardDeck();
+      enhanceAccessibility();
     }
 
     runSelfTests();
