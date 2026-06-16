@@ -10493,12 +10493,14 @@ function selectDemoPlan(planType) {
       const quizValues = Object.values(quizScores).map(Number).filter(score => !Number.isNaN(score));
       const quizAverage = quizValues.length ? Math.round(quizValues.reduce((sum, score) => sum + score, 0) / quizValues.length) : null;
       const certificateUnlocked = completedLessons.length >= totalLessons() && Object.keys(quizScores).length >= modules.length && finalGameComplete;
+      const badgesEarned = modules.filter(m => m.lessons.every((_, i) => courseProgress.lessons[`${m.id}-${i}`])).length;
+      const badgeTotal = modules.length;
       let currentModule = "Not started yet";
       if (completedLessons.length) {
         const next = modules.find(module => module.lessons.some((_, index) => !courseProgress.lessons[`${module.id}-${index}`]));
         currentModule = next ? next.title : "Course lessons complete";
       }
-      return { completedLessons, quizScores, learnedFlashcards, toolsUsed, finalGameComplete, certificateUnlocked, lessonPercent, quizAverage, currentModule };
+      return { completedLessons, quizScores, learnedFlashcards, toolsUsed, finalGameComplete, certificateUnlocked, lessonPercent, quizAverage, currentModule, badgesEarned, badgeTotal };
     }
 
     function renderDemoHonestyNotice() {
@@ -11783,7 +11785,8 @@ function getFreshGame() {
                         <div class="child-progress-grid">
                           <div class="child-progress-stat"><strong>${summary.lessonPercent}%</strong><span>lesson completion</span></div>
                           <div class="child-progress-stat"><strong>${summary.quizAverage === null ? "—" : summary.quizAverage + "%"}</strong><span>quiz average</span></div>
-                          <div class="child-progress-stat"><strong>${summary.finalGameComplete ? "Done" : "Not yet"}</strong><span>final game</span></div>
+                          <div class="child-progress-stat"><strong>${summary.finalGameComplete ? "Done" : "Not yet"}</strong><span>Final Money Skills Test</span></div>
+                          <div class="child-progress-stat"><strong>${summary.badgesEarned}/${summary.badgeTotal}</strong><span>badges earned</span></div>
                           <div class="child-progress-stat"><strong>${summary.learnedFlashcards.length}</strong><span>flashcards learned</span></div>
                           <div class="child-progress-stat"><strong>${summary.toolsUsed.length}</strong><span>tools used</span></div>
                           <div class="child-progress-stat"><strong>${summary.certificateUnlocked ? "Unlocked" : "Locked"}</strong><span>certificate</span></div>
