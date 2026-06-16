@@ -10126,6 +10126,52 @@ a:focus-visible {
 }
 @media (prefers-reduced-motion: reduce) { .mu-feedback-fab { transition: none; } }
 
+/* Feedback modal */
+.mu-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(15, 23, 42, 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.mu-modal {
+  position: relative;
+  width: min(100%, 460px);
+  max-height: 90vh;
+  overflow: auto;
+  background: var(--mu-card);
+  border: 1px solid var(--mu-border);
+  border-radius: var(--mu-radius-lg);
+  box-shadow: var(--mu-shadow-lg);
+  padding: 22px;
+}
+.mu-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: 0;
+  background: transparent;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--mu-muted);
+}
+.mu-feedback-email {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px 14px;
+  border: 1px solid var(--mu-border);
+  border-radius: var(--mu-radius-md);
+  background: var(--mu-bg-soft);
+}
+.mu-feedback-email strong { word-break: break-all; }
+
   </style>
 </head>
 <body>
@@ -11531,19 +11577,61 @@ function getFreshGame() {
       };
     }
 
-    // Optional: paste a Google Form URL here to collect feedback via a form instead of email.
+    // Optional: paste a Google Form URL here to collect feedback via a form instead of the popup.
     const FEEDBACK_FORM_URL = "";
+    const FEEDBACK_EMAIL = "ayaan.ansari0109@gmail.com";
     function openFeedback() {
       if (FEEDBACK_FORM_URL) { window.open(FEEDBACK_FORM_URL, "_blank", "noopener"); return; }
+      closeFeedback();
       const subject = encodeURIComponent("MoneyUnlocked feedback");
       const body = encodeURIComponent(
         "What did you like?\n\n" +
         "What was confusing or boring?\n\n" +
         "Would your student actually use this? Why / why not?\n\n" +
         "What would make it worth paying for, and what price feels fair?\n\n" +
-        "(Page you were on: " + (typeof page !== "undefined" ? page : "") + ")"
+        "(Page: " + (typeof page !== "undefined" ? page : "") + ")"
       );
-      window.location.href = "mailto:ayaan.ansari0109@gmail.com?subject=" + subject + "&body=" + body;
+      const overlay = document.createElement("div");
+      overlay.className = "mu-modal-overlay";
+      overlay.id = "mu-feedback-modal";
+      overlay.onclick = (e) => { if (e.target === overlay) closeFeedback(); };
+      overlay.innerHTML = `
+        <div class="mu-modal" role="dialog" aria-modal="true" aria-label="Send feedback">
+          <button class="mu-modal-close" onclick="closeFeedback()" aria-label="Close">×</button>
+          <div class="mu-pill mu-pill-success">Feedback</div>
+          <h2 style="margin:10px 0 6px">Help make MoneyUnlocked better</h2>
+          <p style="color:var(--mu-text-soft);line-height:1.6;margin:0 0 14px">Email me your thoughts — even one line helps. A few things I'd love to know:</p>
+          <ul style="color:var(--mu-text-soft);line-height:1.7;margin:0 0 16px;padding-left:18px">
+            <li>What did you like?</li>
+            <li>What was confusing or boring?</li>
+            <li>Would your student actually use this?</li>
+            <li>What would make it worth paying for?</li>
+          </ul>
+          <div class="mu-feedback-email">
+            <strong id="mu-feedback-email-text">${FEEDBACK_EMAIL}</strong>
+            <button class="mu-btn mu-btn-secondary" type="button" onclick="copyFeedbackEmail()">Copy email</button>
+          </div>
+          <div id="mu-feedback-copy-status" class="mu-helper-text" role="status" aria-live="polite" style="min-height:18px;margin-top:6px"></div>
+          <div class="mu-flow-actions" style="margin-top:14px">
+            <a class="mu-btn mu-btn-primary" href="mailto:${FEEDBACK_EMAIL}?subject=${subject}&body=${body}">Open email app</a>
+            <button class="mu-btn mu-btn-ghost" type="button" onclick="closeFeedback()">Close</button>
+          </div>
+        </div>`;
+      document.body.appendChild(overlay);
+    }
+    function closeFeedback() {
+      const m = document.getElementById("mu-feedback-modal");
+      if (m) m.remove();
+    }
+    function copyFeedbackEmail() {
+      const status = document.getElementById("mu-feedback-copy-status");
+      const done = () => { if (status) status.textContent = "Copied! Paste it into your email app."; };
+      const fail = () => { if (status) status.textContent = "Couldn't copy — the email is " + FEEDBACK_EMAIL; };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(FEEDBACK_EMAIL).then(done).catch(fail);
+      } else {
+        fail();
+      }
     }
 
     function renderNav() {
