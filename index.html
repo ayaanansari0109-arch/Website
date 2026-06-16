@@ -10103,6 +10103,29 @@ a:focus-visible {
   .mu-btn-primary::before { animation: none !important; }
 }
 
+/* Floating feedback button (all pages) */
+.mu-feedback-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 120;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 800;
+  font-size: 14px;
+  color: #fff;
+  background: var(--mu-grad-primary);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.34);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.mu-feedback-fab:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(37, 99, 235, 0.42); }
+.mu-feedback-fab:focus-visible { outline: none; box-shadow: var(--mu-ring-soft); }
+@media (max-width: 760px) {
+  .mu-feedback-fab { right: 12px; bottom: 12px; padding: 11px 15px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { .mu-feedback-fab { transition: none; } }
+
   </style>
 </head>
 <body>
@@ -10115,6 +10138,7 @@ a:focus-visible {
   </header>
 
   <main id="app" tabindex="-1" aria-label="Main content"></main>
+  <button class="mu-feedback-fab" onclick="openFeedback()" aria-label="Send feedback about MoneyUnlocked">💬 Feedback</button>
 
   <footer>
     <div class="footer-inner">
@@ -11505,6 +11529,21 @@ function getFreshGame() {
         challenge: "Teach this concept to someone else using a real student example.",
         takeaways: ["Money choices work best when intentional.", "Small decisions matter when they repeat.", "Understanding the concept helps protect future options."]
       };
+    }
+
+    // Optional: paste a Google Form URL here to collect feedback via a form instead of email.
+    const FEEDBACK_FORM_URL = "";
+    function openFeedback() {
+      if (FEEDBACK_FORM_URL) { window.open(FEEDBACK_FORM_URL, "_blank", "noopener"); return; }
+      const subject = encodeURIComponent("MoneyUnlocked feedback");
+      const body = encodeURIComponent(
+        "What did you like?\n\n" +
+        "What was confusing or boring?\n\n" +
+        "Would your student actually use this? Why / why not?\n\n" +
+        "What would make it worth paying for, and what price feels fair?\n\n" +
+        "(Page you were on: " + (typeof page !== "undefined" ? page : "") + ")"
+      );
+      window.location.href = "mailto:ayaan.ansari0109@gmail.com?subject=" + subject + "&body=" + body;
     }
 
     function renderNav() {
