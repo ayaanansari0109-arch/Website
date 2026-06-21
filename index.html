@@ -10989,7 +10989,7 @@ function renderWisePrepResults(type, saved) {
       const isMock = type === "mock";
       const isDiagnostic = type === "diagnostic";
       const statusText = isMock ? (saved.percent >= 66 ? "Practice benchmark met" : "Below practice benchmark") : isDiagnostic ? "Diagnostic complete" : "Practice set complete";
-      const helper = isMock ? "66% is shown as a practice benchmark only. It is not an official W!SE score and does not guarantee any official exam result." : isDiagnostic ? "Use this diagnostic to choose what to review before the mock exam." : "Use the missed-question review to decide whether to reread the mini-lesson.";
+      const helper = isMock ? "66% is shown as a practice benchmark only. It is not an official test score and does not guarantee any official exam result." : isDiagnostic ? "Use this diagnostic to choose what to review before the mock exam." : "Use the missed-question review to decide whether to reread the mini-lesson.";
       return `
         <div class="mu-wise-results">
           <div class="mu-pill ${isMock && saved.percent < 66 ? "mu-pill-warning" : "mu-pill-success"}">${statusText}</div>
@@ -11021,10 +11021,10 @@ function renderWisePrep() {
         <main id="wise-prep-area" data-scroll-target class="mu-wise-shell">
           <section class="mu-wise-hero">
             <div class="mu-card-elevated">
-              <div class="mu-pill mu-pill-success">W!SE-style prep</div>
-              <h1>W!SE-style Financial Literacy Test Prep</h1>
+              <div class="mu-pill mu-pill-success">Financial literacy prep</div>
+              <h1>Financial Literacy Test Prep</h1>
               <p>Learn the key topics, review vocabulary, practice by section, and take a 50-question mock exam.</p>
-              <div class="mu-flow-note"><span class="mu-trust-dot"></span><div><strong>Not official W!SE material.</strong><span>This is W!SE-style prep based on publicly available financial literacy topic areas. This is not the official W!SE Financial Literacy Certification Test, MoneyUnlocked is not affiliated with W!SE, and passing this practice exam does not guarantee passing any official exam.</span></div></div>
+              <div class="mu-flow-note"><span class="mu-trust-dot"></span><div><strong>Practice materials only.</strong><span>This is original test prep based on common financial literacy topic areas. It is not an official certification exam, and passing this practice exam does not guarantee passing any official test your school may use.</span></div></div>
             </div>
             <aside class="mu-card-elevated">
               <div class="mu-pill">Prep snapshot</div>
@@ -11044,7 +11044,7 @@ function renderWisePrep() {
           ${renderWisePrepQuiz("diagnostic", "Quick Diagnostic", "Answer 20 original questions to identify strengths, weak areas, and recommended prep lessons.")}
 
           <section class="mu-card mu-wise-section">
-            <div class="mu-section-heading"><div class="mu-pill">W!SE-style Prep Lessons</div><h2>9 mini-lessons</h2><p>Each lesson includes a short explanation, key terms, real-life example, common test trap, mini-check, and topic practice set.</p></div>
+            <div class="mu-section-heading"><div class="mu-pill">Prep Lessons</div><h2>9 mini-lessons</h2><p>Each lesson includes a short explanation, key terms, real-life example, common test trap, mini-check, and topic practice set.</p></div>
             <div class="mu-wise-lesson-grid">
               ${wisePrepLessons.map((lesson, index) => `
                 <article class="mu-wise-lesson-card">
@@ -11074,7 +11074,7 @@ function renderWisePrep() {
           </section>
 
           <section class="mu-card mu-wise-section">
-            <div class="mu-section-heading"><div class="mu-pill">Vocabulary review</div><h2>W!SE-style vocabulary deck</h2><p>Review common financial literacy terms with student-friendly definitions and examples.</p></div>
+            <div class="mu-section-heading"><div class="mu-pill">Vocabulary review</div><h2>Financial literacy vocabulary deck</h2><p>Review common financial literacy terms with student-friendly definitions and examples.</p></div>
             <div class="mu-wise-vocab-grid">
               ${wiseVocabularyTerms.map(term => `<article class="mu-wise-vocab-card"><div class="mu-pill">${escapeHtml(term.domain)}</div><h3>${escapeHtml(term.term)}</h3><p>${escapeHtml(term.definition)}</p><p><strong>Example:</strong> ${escapeHtml(term.example)}</p></article>`).join("")}
             </div>
@@ -11083,7 +11083,7 @@ function renderWisePrep() {
           ${renderWisePrepQuiz("mock", "50-question mock exam", "Try to finish in about 50 minutes. The 66% benchmark shown here is practice-only and not an official score.")}
 
           <section class="mu-card mu-wise-section">
-            <div class="mu-section-heading"><div class="mu-pill mu-pill-success">Safety reminder</div><h2>Original educational practice only</h2><p>These lessons and questions are original MoneyUnlocked practice materials. They are not official W!SE questions, not copied from W!SE, not affiliated with W!SE, and do not guarantee passing any official exam.</p></div>
+            <div class="mu-section-heading"><div class="mu-pill mu-pill-success">Safety reminder</div><h2>Original educational practice only</h2><p>These lessons and questions are original MoneyUnlocked practice materials. They are not official certification questions and do not guarantee passing any official exam your school may use.</p></div>
           </section>
         </main>
       `;
@@ -12704,11 +12704,11 @@ function getFreshGame() {
 
               <article class="mu-dashboard-hub-card">
                 <div class="mu-pill">Test prep</div>
-                <h3>W!SE-style Prep</h3>
+                <h3>Financial Literacy Test Prep</h3>
                 <p>Review financial literacy topics with original diagnostic questions, vocabulary, and a 50-question mock exam.</p>
                 <p class="mu-helper-text">${progress.wisePrep && progress.wisePrep.mock ? `Latest mock score: ${progress.wisePrep.mock.percent}%.` : "No mock exam score yet."}</p>
                 <div class="mu-dashboard-hub-actions">
-                  <button class="mu-btn mu-btn-primary" onclick="goToPage('W!SE Prep')">Open W!SE Prep</button>
+                  <button class="mu-btn mu-btn-primary" onclick="goToPage('W!SE Prep')">Open Test Prep</button>
                   <button class="mu-btn mu-btn-secondary" onclick="goToPage('Tools')">Back to Practice</button>
                 </div>
               </article>
@@ -12828,7 +12828,7 @@ function getFreshGame() {
     }
 
     const moduleTracks = { m1:"core",m2:"core",m3:"core",m4:"core",m5:"core",m6:"core",m7:"core",m10:"core",m11:"core",m21:"core",m22:"core",m32:"core", m8:"support",m9:"support",m12:"support",m18:"support",m23:"support",m25:"support",m26:"support",m31:"support", m13:"enrich",m14:"enrich",m15:"enrich",m16:"enrich",m17:"enrich",m19:"enrich",m20:"enrich",m24:"enrich",m27:"enrich",m28:"enrich",m29:"enrich" };
-    const trackMeta = { core:{ label:"W!SE Core", cls:"mu-track-core" }, support:{ label:"Supporting", cls:"mu-track-support" }, enrich:{ label:"Enrichment", cls:"mu-track-enrich" } };
+    const trackMeta = { core:{ label:"Core", cls:"mu-track-core" }, support:{ label:"Supporting", cls:"mu-track-support" }, enrich:{ label:"Enrichment", cls:"mu-track-enrich" } };
     function moduleTrack(id){ return trackMeta[moduleTracks[id] || "support"]; }
 
     function renderCurriculum() {
@@ -13503,10 +13503,10 @@ function getFreshGame() {
               </article>
               <article class="mu-practice-review-card mu-practice-review-card-feature">
                 <div class="mu-pill mu-pill-success">Test prep</div>
-                <h3>W!SE-style Test Prep</h3>
+                <h3>Financial Literacy Test Prep</h3>
                 <p>Diagnostic, 9 domain mini-lessons, vocabulary, topic practice, and a 50-question mock exam to review before a school financial literacy assessment.</p>
-                <p class="mu-helper-text">${progress.wisePrep && progress.wisePrep.mock ? `Latest mock score: ${progress.wisePrep.mock.percent}%.` : "No mock exam score yet. W!SE-style practice only — not the official W!SE test."}</p>
-                <div class="mu-dashboard-hub-actions"><button class="mu-btn mu-btn-primary" onclick="goToPage('W!SE Prep')">Open W!SE Prep</button></div>
+                <p class="mu-helper-text">${progress.wisePrep && progress.wisePrep.mock ? `Latest mock score: ${progress.wisePrep.mock.percent}%.` : "No mock exam score yet. Practice only — not an official certification test."}</p>
+                <div class="mu-dashboard-hub-actions"><button class="mu-btn mu-btn-primary" onclick="goToPage('W!SE Prep')">Open Test Prep</button></div>
               </article>
               <article class="mu-practice-review-card">
                 <div class="mu-pill mu-pill-success">Capstone</div>
@@ -14963,7 +14963,7 @@ function getFreshGame() {
             <div class="mu-progress-metric progress-metric-card"><div class="mu-pill mu-pill-success">Flashcards learned</div><h2>${learnedCards}</h2><p>Cards you marked learned.</p></div>
             <div class="mu-progress-metric progress-metric-card"><div class="mu-pill mu-pill-success">Tools explored</div><h2>${toolCount}</h2><p>Interactive tool${toolCount === 1 ? "" : "s"} used.</p></div>
             <div class="mu-progress-metric progress-metric-card"><div class="mu-pill mu-pill-success">Badges earned</div><h2>${earnedBadges}</h2><p>Module badge${earnedBadges === 1 ? "" : "s"} earned.</p></div>
-            <div class="mu-progress-metric progress-metric-card"><div class="mu-pill">W!SE-style prep</div><h2>${wisePrep.mock ? `${wisePrep.mock.percent}%` : "—"}</h2><p>${wisePrep.mock ? `Strongest: ${wisePrep.mock.strongest}. Weakest: ${wisePrep.mock.weakest}.` : "No mock exam score saved yet."}</p></div>
+            <div class="mu-progress-metric progress-metric-card"><div class="mu-pill">Test prep</div><h2>${wisePrep.mock ? `${wisePrep.mock.percent}%` : "—"}</h2><p>${wisePrep.mock ? `Strongest: ${wisePrep.mock.strongest}. Weakest: ${wisePrep.mock.weakest}.` : "No mock exam score saved yet."}</p></div>
           </section>
 
           ${renderCompletionPanel()}
@@ -15239,14 +15239,14 @@ function getFreshGame() {
             <div class="mu-section-heading">
               <div class="mu-pill mu-pill-success">Readiness checklist</div>
               <h2>Check your prep before you start.</h2>
-              <p>You can take the test anytime, but the strongest completion comes after lessons, quizzes, tools, flashcards, and optional W!SE-style prep.</p>
+              <p>You can take the test anytime, but the strongest completion comes after lessons, quizzes, tools, flashcards, and optional test prep.</p>
             </div>
             <div class="mu-final-checklist-grid">
               <div class="mu-final-check-card"><strong>${lessonStats}</strong><span>lessons completed</span></div>
               <div class="mu-final-check-card"><strong>${quizStats}</strong><span>module quizzes saved</span></div>
               <div class="mu-final-check-card"><strong>${toolsUsed}</strong><span>tools used</span></div>
               <div class="mu-final-check-card"><strong>${flashcardsLearned}</strong><span>flashcards learned</span></div>
-              <div class="mu-final-check-card"><strong>${wiseDone ? "Started" : "Optional"}</strong><span>W!SE-style prep</span></div>
+              <div class="mu-final-check-card"><strong>${wiseDone ? "Started" : "Optional"}</strong><span>Test prep</span></div>
             </div>
             <div class="mu-public-actions">
               <button class="mu-btn mu-btn-primary" onclick="startFinalTest()">${result ? "Retake Final Money Skills Test" : "Start Final Money Skills Test"}</button>
@@ -15288,7 +15288,7 @@ function getFreshGame() {
             <div class="mu-section-heading">
               <div class="mu-pill">Topic coverage</div>
               <h2>What the final test covers</h2>
-              <p>Questions are original MoneyUnlocked practice questions and are not official W!SE, state, or certification exam questions.</p>
+              <p>Questions are original MoneyUnlocked practice questions and are not official state or certification exam questions.</p>
             </div>
             <div class="mu-final-topic-list">
               ${getFinalTestBreakdown({}).map(row => `<div class="mu-final-topic-card"><strong>${escapeHtml(row.domain)}</strong><span>${row.total} questions</span></div>`).join("")}
