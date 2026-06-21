@@ -10267,21 +10267,21 @@ a:focus-visible {
         return {
           planType: "group",
           planName: "Group Plan",
-          subtitle: "More than 5 kids",
+          subtitle: "More than 5 students",
           useCase: "Homeschool group, classroom, tutoring group, organization, or large family",
-          demoPrice: "Request group access",
+          demoPrice: "Free during testing",
           maxChildren: 30,
           buttonLabel: "Start Group Demo"
         };
       }
       return {
         planType: "family",
-        planName: "Family Plan",
-        subtitle: "Up to 5 kids",
-        useCase: "Parent/guardian buying for their household",
-        demoPrice: "$0 during testing",
+        planName: "Standard Plan",
+        subtitle: "Up to 5 students",
+        useCase: "For a parent, tutor, or anyone with up to 5 students",
+        demoPrice: "Free during testing",
         maxChildren: 5,
-        buttonLabel: "Start Family Demo"
+        buttonLabel: "Start Standard Demo"
       };
     }
 
@@ -10622,7 +10622,7 @@ function selectDemoPlan(planType) {
         return;
       }
       if (planType === "family" && requestedChildren > 5) {
-        if (status) status.innerHTML = `<div class="demo-account-notice mu-warning-state">The Family Plan supports up to 5 kids. Choose Group Plan for more students.</div>`;
+        if (status) status.innerHTML = `<div class="demo-account-notice mu-warning-state">The Standard Plan supports up to 5 kids. Choose Group Plan for more students.</div>`;
         scrollResultIntoView("parent-setup-status");
         return;
       }
@@ -10670,7 +10670,7 @@ function selectDemoPlan(planType) {
       const currentCount = parent.studentIds.filter(id => accounts.students[id] && accounts.students[id].status === "active").length;
       const limit = getChildLimit(parent);
       if (currentCount >= limit) {
-        if (status) status.innerHTML = `<div class="demo-account-notice mu-warning-state">${parent.planType === "family" ? "The Family Plan supports up to 5 kids. Choose Group Plan for more students." : "This Group Plan demo is capped at 30 active child profiles for public testing."}</div>`;
+        if (status) status.innerHTML = `<div class="demo-account-notice mu-warning-state">${parent.planType === "family" ? "The Standard Plan supports up to 5 kids. Choose Group Plan for more students." : "This Group Plan demo is capped at 30 active child profiles for public testing."}</div>`;
         scrollResultIntoView("child-profile-status");
         return;
       }
@@ -11770,7 +11770,7 @@ function getFreshGame() {
                 <div class="account-form-grid">
                   <div class="mu-flow-field"><label>Parent name</label><input id="parent-demo-name" class="input mu-input" required placeholder="Parent name"></div>
                   <div class="mu-flow-field"><label>Parent email</label><input id="parent-demo-email" type="email" class="input mu-input" required placeholder="parent@example.com"></div>
-                  <div class="mu-flow-field"><label>Plan type</label><select id="parent-demo-plan" class="input mu-input"><option value="family">Family Access</option><option value="group">Group Access</option></select><p class="mu-helper-text">Family demo access supports up to 5 child profiles. Group Plan is capped at 30 in this browser demo.</p></div>
+                  <div class="mu-flow-field"><label>Plan type</label><select id="parent-demo-plan" class="input mu-input"><option value="family">Standard (up to 5 students)</option><option value="group">Group (up to 30 students)</option></select><p class="mu-helper-text">Standard access supports up to 5 child profiles. Group access is capped at 30 in this browser demo.</p></div>
                   <div class="mu-flow-field"><label>Number of children</label><input id="parent-demo-children" type="number" min="0" max="30" value="1" class="input mu-input"><p class="mu-helper-text">This does not create child profiles yet; it records your expected setup size.</p></div>
                 </div>
                 <div class="mu-flow-actions">
@@ -11836,7 +11836,7 @@ function getFreshGame() {
               <h1>${escapeHtml(parent.name)}’s demo parent dashboard</h1>
               <p>Give each student their own code. Each student should use only their own code so progress stays connected to the right profile.</p>
               <div class="pill-row">
-                ${pill(parent.planType === "family" ? "Family Plan" : "Group Plan", true)}
+                ${pill(parent.planType === "family" ? "Standard Plan" : "Group Plan", true)}
                 ${pill(`${activeCount}/${limit} active children`, true)}
                 ${pill(`${children.filter(child => child.codeStatus === "claimed").length} claimed`, true)}
                 ${pill("Browser demo", true)}
@@ -11866,7 +11866,7 @@ function getFreshGame() {
               <form onsubmit="addChildProfile(event)" class="mu-flow-form">
                 <div class="mu-pill mu-pill-success">Step 2</div>
                 <h2 style="margin:0">Create child profile</h2>
-                <p class="mu-helper-text">${parent.planType === "family" ? "Family Plan supports up to 5 child profiles. Choose Group Plan for more students." : "Group Plan allows more than 5 children in this demo, capped at 50 for clean testing."}</p>
+                <p class="mu-helper-text">${parent.planType === "family" ? "Standard Plan supports up to 5 child profiles. Choose Group Plan for more students." : "Group Plan allows more than 5 children in this demo, capped at 50 for clean testing."}</p>
                 <div class="mu-flow-field">
                   <label>Child name</label>
                   <input id="child-profile-name" class="input mu-input" required placeholder="Child name">
@@ -12054,7 +12054,7 @@ function getFreshGame() {
             <div class="mu-section-heading center">
               <div class="mu-pill mu-pill-success">Choose Plan</div>
               <h2>Pick a public-testing demo path.</h2>
-              <p>Family Plan is for up to 5 kids. Group Plan is for classes, groups, or more than 5 kids.</p>
+              <p>Standard Plan is for up to 5 kids. Group Plan is for classes, groups, or more than 5 kids.</p>
             </div>
             <div class="mu-buy-plan-grid">${planCards}</div>
           </section>
@@ -12394,7 +12394,7 @@ function getFreshGame() {
               <h1>Build real-life money skills before adulthood.</h1>
               <p>MoneyUnlocked is an expanded financial literacy curriculum for students, with lessons, quizzes, flashcards, tools, progress tracking, and parent visibility.</p>
               <div class="mu-hero-actions">
-                <button class="mu-btn mu-btn-primary" onclick="selectDemoPlan('family')">Start Family Demo</button>
+                <button class="mu-btn mu-btn-primary" onclick="selectDemoPlan('family')">Start Standard Demo</button>
                 <button class="mu-btn mu-btn-secondary" onclick="selectDemoPlan('group')">Start Group Demo</button>
                 <button class="mu-btn mu-btn-ghost" onclick="goToPage('Course Overview')">Preview curriculum</button>
               </div>
@@ -12459,7 +12459,7 @@ function getFreshGame() {
                 `).join("")}
               </div>
               <div class="mu-public-actions">
-                <button class="mu-btn mu-btn-primary" onclick="selectDemoPlan('family')">Start Family Demo</button>
+                <button class="mu-btn mu-btn-primary" onclick="selectDemoPlan('family')">Start Standard Demo</button>
                 <button class="mu-btn mu-btn-secondary" onclick="goToPage('Parents')">See parent info</button>
               </div>
             </div>
@@ -12549,7 +12549,7 @@ function getFreshGame() {
               <p>MoneyUnlocked helps students practice money skills in a safe educational environment, with parent visibility and no wealth promises.</p>
             </div>
             <div class="mu-public-actions">
-              <button class="mu-btn mu-btn-primary" onclick="selectDemoPlan('family')">Start Family Demo</button><button class="mu-btn mu-btn-secondary" onclick="selectDemoPlan('group')">Start Group Demo</button>
+              <button class="mu-btn mu-btn-primary" onclick="selectDemoPlan('family')">Start Standard Demo</button><button class="mu-btn mu-btn-secondary" onclick="selectDemoPlan('group')">Start Group Demo</button>
               <button class="mu-btn mu-btn-secondary" onclick="goToPage('Course Overview')">Preview curriculum</button>
               <button class="mu-btn mu-btn-ghost" onclick="goToPage('FAQ')">Read FAQ</button>
             </div>
