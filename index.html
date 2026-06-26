@@ -12401,9 +12401,9 @@ function getFreshGame() {
               <h1>Money skills your kid will actually use.</h1>
               <p>MoneyUnlocked teaches budgeting, saving, credit, and real money decisions through lessons, quizzes, flashcards, and parent progress tracking. This is an early, free preview — try it and tell us what to fix.</p>
               <div class="mu-hero-actions">
+                <button class="mu-btn mu-btn-ghost" onclick="goToPage('Sample Lesson')">Try a lesson, no signup</button>
                 <button class="mu-btn mu-btn-primary" onclick="selectDemoPlan('family')">Try it free</button>
                 <button class="mu-btn mu-btn-secondary" onclick="selectDemoPlan('group')">Try it for a class/group</button>
-                <button class="mu-btn mu-btn-ghost" onclick="goToPage('Course Overview')">Preview curriculum</button>
               </div>
               <div class="mu-trust-note"><span class="mu-trust-dot"></span>Free preview. No payment, no cost. Educational-only — no investing advice, no wealth promises.</div>
             </div>
@@ -15328,19 +15328,19 @@ function getFreshGame() {
           <div class="sample-preview-intro">
             <div class="pill green">Free Sample Lesson</div>
             <h1>Preview what a MoneyUnlocked lesson feels like.</h1>
-            <p>This public preview uses one real beginner-friendly lesson from the course: Module 1, Needs vs. Wants. It is read-only, does not save progress, and does not unlock the full paid curriculum.</p>
+            <p>This public preview uses one real beginner-friendly lesson from the course: Module 1, Needs vs. Wants. It is read-only and does not save progress. No account or signup needed.</p>
             <div class="pill-row">
               ${pill("No login required", true)}
               ${pill("Read-only preview", true)}
               ${pill("No progress saved", true)}
               ${pill("Beginner-friendly", true)}
             </div>
-            <div class="actions"><button class="btn green" onclick="goToPage('Sample Lesson')">Preview Free Lesson</button><button class="btn outline" onclick="goToPage('Course Overview')">View Course Overview</button><button class="btn light" onclick="goToPage('Payment')">Choose a Plan</button></div>
+            <div class="actions"><button class="btn green" onclick="goToPage('Sample Lesson')">Preview Free Lesson</button><button class="btn outline" onclick="goToPage('Course Overview')">View Course Overview</button><button class="btn light" onclick="goToPage('Payment')">Set Up Free Preview Account</button></div>
           </div>
           ${card(`
-            <div class="pill green">What unlocks after access</div>
+            <div class="pill green">What you get with a free preview account</div>
             <h2 style="margin-top:10px">The full course adds structure, practice, and progress.</h2>
-            <p>Create an account after the demo payment flow to use the Dashboard, full Curriculum, quizzes, flashcards, tools, progress tracking, badges, and final simulation.</p>
+            <p>Create a free preview account to use the Dashboard, full Curriculum, quizzes, flashcards, tools, progress tracking, badges, and final simulation.</p>
             <div class="parents-trust-list" style="margin-top:16px">
               <div class="parents-trust-item"><div class="tool-icon">1</div><div><strong>Learn</strong><p style="margin:3px 0 0">Work through an expanded multi-module course with lessons, quizzes, and review activities.</p></div></div>
               <div class="parents-trust-item"><div class="tool-icon">2</div><div><strong>Practice</strong><p style="margin:3px 0 0">Use quizzes, flashcards, and interactive money tools.</p></div></div>
