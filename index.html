@@ -13373,26 +13373,26 @@ function getFreshGame() {
     function renderTools() {
       document.getElementById("app").className = "";
       const tools = [
-        { name: "Budget", title: "Monthly Money Plan Simulator", short: "Budget", description: "Build a monthly plan and see if it is strong, tight, or risky.", group: "core" },
-        { name: "Savings", title: "Goal Builder", short: "Goals", description: "Plan how much to save each week or month to hit a goal.", group: "core" },
-        { name: "Paycheck", title: "Paycheck Breakdown Simulator", short: "Paycheck", description: "Compare gross pay, deductions, take-home pay, and monthly estimate.", group: "core" },
-        { name: "Subscriptions", title: "Subscription Leak Detector", short: "Subscriptions", description: "Find quiet monthly costs and compare cleanup choices.", group: "core" },
-        { name: "Big Purchase", title: "Big Purchase Decision Score", short: "Big Purchase", description: "Slow down before buying something expensive.", group: "core" },
-        { name: "Scam Check", title: "Scam Risk Detector", short: "Scam Detector", description: "Practice spotting suspicious messages and money red flags.", group: "core" },
-        { name: "Debt", title: "Debt / Credit Card Cost Simulator", short: "Debt / Credit", description: "Estimate payoff time and interest impact.", group: "advanced" },
-        { name: "Investing", title: "Long-Term Growth Simulator", short: "Investing Growth", description: "Educational long-term contribution and growth estimate.", group: "advanced" },
-        { name: "Inflation", title: "Future Price Shock Simulator", short: "Inflation", description: "Project today’s price into a future estimated price.", group: "advanced" },
-        { name: "Supply", title: "Price Pressure Simulator", short: "Supply & Demand", description: "Extra economics practice for why prices move.", group: "advanced" },
-        { name: "Spending", title: "Spending Decision Game", short: "Spending Game", description: "Extra impulse-spending tradeoff practice.", group: "advanced" }
+        { name: "Budget", title: "Monthly Budget Planner", short: "Budget", description: "Add up your money for the month and see how much is left.", group: "core" },
+        { name: "Savings", title: "Savings Goal Planner", short: "Goals", description: "See how much to save each week to reach a goal.", group: "core" },
+        { name: "Paycheck", title: "Paycheck Breakdown", short: "Paycheck", description: "See how much of a paycheck you actually take home.", group: "core" },
+        { name: "Subscriptions", title: "Subscription Cost Checker", short: "Subscriptions", description: "Add up your monthly subscriptions and what they cost per year.", group: "core" },
+        { name: "Big Purchase", title: "Should I Buy It?", short: "Big Purchase", description: "Think it through before buying something expensive.", group: "core" },
+        { name: "Scam Check", title: "Scam Risk Checker", short: "Scam Check", description: "Learn to spot scam messages and fake money offers.", group: "core" },
+        { name: "Debt", title: "Credit Card Payoff Estimator", short: "Credit Cards", description: "See how long it takes to pay off a card and what interest costs.", group: "advanced" },
+        { name: "Investing", title: "Money Growth Estimator", short: "Investing", description: "See how money can grow over time when you save regularly.", group: "advanced" },
+        { name: "Inflation", title: "Future Price Estimator", short: "Inflation", description: "See how much something might cost a few years from now.", group: "advanced" },
+        { name: "Supply", title: "Why Prices Change", short: "Supply & Demand", description: "Extra practice on what makes prices go up or down.", group: "advanced" },
+        { name: "Spending", title: "Spending Decision Game", short: "Spending Game", description: "Extra practice making quick spending choices.", group: "advanced" }
       ];
       const toolMap = Object.fromEntries(tools.map(tool => [tool.name, tool]));
       const coreTools = tools.filter(tool => tool.group === "core");
       const advancedTools = tools.filter(tool => tool.group === "advanced");
       const activeMeta = toolMap[activeTool] || toolMap.Budget;
       const startCards = [
-        { heading: "I want to plan my money", tool: "Budget", text: "Start with a monthly plan and budget health score." },
-        { heading: "I’m saving for something", tool: "Savings", text: "Turn a goal into weekly and monthly savings targets." },
-        { heading: "I’m deciding if I should buy something", tool: "Big Purchase", text: "Check savings impact, regret risk, and smarter alternatives." }
+        { heading: "I want to plan my money", tool: "Budget", text: "See how much money you have left each month." },
+        { heading: "I’m saving for something", tool: "Savings", text: "Find out how much to save each week to reach it." },
+        { heading: "I’m deciding if I should buy something", tool: "Big Purchase", text: "Walk through a few questions before you spend." }
       ];
       const renderCoreCard = (tool) => `<button class="mu-tools-core-card ${tool.name === activeTool ? "active" : ""}" onclick="setTool('${tool.name}')">
         <div class="mu-pill mu-pill-success">${tool.short}</div>
@@ -13400,7 +13400,7 @@ function getFreshGame() {
         <span>${tool.description}</span>
       </button>`;
       const renderAdvancedCard = (tool) => `<button class="mu-tools-advanced-card ${tool.name === activeTool ? "active" : ""}" onclick="setTool('${tool.name}')">
-        <div class="mu-pill">Advanced Practice</div>
+        <div class="mu-pill">Extra Practice</div>
         <strong>${tool.short}</strong>
         <span>${tool.description}</span>
       </button>`;
@@ -13410,11 +13410,11 @@ function getFreshGame() {
             <div class="mu-card-elevated">
               <div class="mu-pill mu-pill-success">Practice</div>
               <h1>Money Tools</h1>
-              <p>Use simple decision tools to plan, compare, and avoid common money mistakes.</p>
+              <p>Simple tools to help you plan your money and make smart choices.</p>
               <div class="pill-row">
-                ${pill("6 core tools", true)}
-                ${pill("Advanced practice is secondary", true)}
-                ${pill("Educational estimates only", true)}
+                ${pill("6 main tools", true)}
+                ${pill("Extra practice tools too", true)}
+                ${pill("For learning only", true)}
               </div>
             </div>
             <aside class="mu-card-elevated">
@@ -13428,8 +13428,8 @@ function getFreshGame() {
           <section class="mu-section mu-tools-simple-section">
             <div class="mu-section-heading">
               <div class="mu-pill mu-pill-success">Start Here</div>
-              <h2>Choose what you are trying to do.</h2>
-              <p>Start with one of these three decision paths.</p>
+              <h2>What are you trying to do?</h2>
+              <p>Pick one of these to get started.</p>
             </div>
             <div class="mu-tools-start-grid">
               ${startCards.map(card => `<button class="mu-tools-start-card" onclick="setTool('${card.tool}')">
@@ -13442,9 +13442,9 @@ function getFreshGame() {
 
           <section class="mu-section mu-tools-simple-section">
             <div class="mu-section-heading">
-              <div class="mu-pill mu-pill-success">Core Tools</div>
+              <div class="mu-pill mu-pill-success">Main Tools</div>
               <h2>Use these first.</h2>
-              <p>These six tools cover the main student money decisions: budgeting, saving, paychecks, subscriptions, purchases, and scams.</p>
+              <p>These six cover the basics: budgeting, saving, paychecks, subscriptions, buying decisions, and scams.</p>
             </div>
             <div class="mu-tools-core-grid">
               ${coreTools.map(renderCoreCard).join("")}
@@ -13467,15 +13467,15 @@ function getFreshGame() {
 
           <section class="mu-section mu-tools-simple-section">
             <div class="mu-section-heading">
-              <div class="mu-pill">Advanced Practice</div>
-              <h2>Extra tools for deeper practice.</h2>
-              <p>These are still available, but they are secondary so they do not compete with the main personal finance tools.</p>
+              <div class="mu-pill">Extra Practice</div>
+              <h2>Extra tools to explore.</h2>
+              <p>These are bonus tools. Try them once you are comfortable with the main six.</p>
             </div>
             <div class="mu-tools-advanced-grid">
               ${advancedTools.map(renderAdvancedCard).join("")}
             </div>
             <div class="mu-tools-secondary-note">
-              Debt/Credit and Investing stay available for students ready for deeper practice. Inflation and Supply & Demand are moved out of the main tools because they are more specialized classroom-style practice.
+              Credit Cards and Investing are here when you are ready for more. Inflation and Why Prices Change are extra practice that go a bit deeper.
             </div>
           </section>
 
@@ -13543,15 +13543,15 @@ function getFreshGame() {
         <section class="mu-moneylab-card">
           <div class="mu-moneylab-header">
             <div>
-              <div class="mu-pill mu-pill-success">Money Lab • Budget Dashboard</div>
-              <h2>Monthly Money Plan Simulator</h2>
-              <p>Build a monthly money dashboard that shows leftover cash, spending pressure, savings strength, and smarter adjustment options.</p>
+              <div class="mu-pill mu-pill-success">Budget</div>
+              <h2>Monthly Budget Planner</h2>
+              <p>Type in your money for the month. The tool shows how much you have left and where it is going.</p>
             </div>
-            <div class="mu-moneylab-side-note"><strong>Use this when:</strong><br>You want to see if your monthly plan is strong, tight, or risky before the month starts.</div>
+            <div class="mu-moneylab-side-note"><strong>Use this when:</strong><br>You want to know if your money lasts the whole month before it starts.</div>
           </div>
 
           <div class="mu-moneylab-section">
-            <h3>Scenario presets</h3>
+            <h3>Try an example</h3>
             <div class="mu-moneylab-scenario-grid">
               <button class="mu-moneylab-scenario" type="button" onclick="document.getElementById('budget-income').value='450';document.getElementById('budget-needs').value='150';document.getElementById('budget-food').value='80';document.getElementById('budget-wants').value='90';document.getElementById('budget-subs').value='25';document.getElementById('budget-savings').value='60'"><strong>Part-time student</strong><span>Balanced starter plan</span></button>
               <button class="mu-moneylab-scenario" type="button" onclick="document.getElementById('budget-income').value='700';document.getElementById('budget-needs').value='230';document.getElementById('budget-food').value='120';document.getElementById('budget-wants').value='100';document.getElementById('budget-subs').value='30';document.getElementById('budget-savings').value='180'"><strong>Saving for a car</strong><span>Higher savings target</span></button>
@@ -13561,18 +13561,18 @@ function getFreshGame() {
           </div>
 
           <div class="mu-moneylab-section">
-            <h3>Monthly plan inputs</h3>
+            <h3>Your money for the month</h3>
             <div class="form-grid mu-budgetlab-input-grid">
-              ${numberInput("Monthly income", "budget-income", 400)}
-              ${numberInput("Core needs", "budget-needs", 170)}
+              ${numberInput("Money coming in", "budget-income", 400)}
+              ${numberInput("Needs (phone, transport, etc.)", "budget-needs", 170)}
               ${numberInput("Food", "budget-food", 70)}
-              ${numberInput("Wants", "budget-wants", 90)}
+              ${numberInput("Fun / wants", "budget-wants", 90)}
               ${numberInput("Subscriptions", "budget-subs", 25)}
               ${numberInput("Savings", "budget-savings", 60)}
             </div>
           </div>
 
-          <div class="actions"><button class="btn green" onclick="calculateBudget()">Analyze Budget Health</button></div>
+          <div class="actions"><button class="btn green" onclick="calculateBudget()">See My Budget</button></div>
           <div id="budget-result"></div>
         </section>
       `);
@@ -13637,29 +13637,24 @@ function getFreshGame() {
       }
       document.getElementById("budget-result").innerHTML = `
         <div class="mu-result-card result-card ${good ? "good" : "caution"}">
-          <div class="mu-pill ${good ? "mu-pill-success" : "mu-pill-warning"}">Budget Health Score: ${status}</div>
+          <div class="mu-pill ${good ? "mu-pill-success" : "mu-pill-warning"}">${status}</div>
           <div class="mu-result-value">$${left.toFixed(0)} left</div>
           <div class="mu-moneylab-meter"><div class="mu-moneylab-meter-fill" style="--value:${meter}%"></div></div>
-          <div class="mu-moneylab-meter-labels"><span>Risky</span><span>Needs work</span><span>Strong</span></div>
+          <div class="mu-moneylab-meter-labels"><span>Risky</span><span>Tight</span><span>Strong</span></div>
           <div class="mu-moneylab-result-grid">
-            <div class="mu-moneylab-stat"><strong>${pressure}%</strong><span>spending pressure</span></div>
-            <div class="mu-moneylab-stat"><strong>${savingsStrength}%</strong><span>savings strength</span></div>
-            <div class="mu-moneylab-stat"><strong>${subsPct.toFixed(1)}%</strong><span>subscription share</span></div>
+            <div class="mu-moneylab-stat"><strong>${pressure}%</strong><span>of your money spent</span></div>
+            <div class="mu-moneylab-stat"><strong>${savingsPct.toFixed(1)}%</strong><span>going to savings</span></div>
+            <div class="mu-moneylab-stat"><strong>${subsPct.toFixed(1)}%</strong><span>on subscriptions</span></div>
           </div>
           <div class="mu-moneylab-comparison-grid">
-            <div class="mu-moneylab-compare"><strong>$${left.toFixed(0)}</strong><span>current plan leftover</span></div>
-            <div class="mu-moneylab-compare"><strong>$${improvedLeft.toFixed(0)}</strong><span>if wants -10% and subscriptions -25%</span></div>
-            <div class="mu-moneylab-compare"><strong>${wantsPct.toFixed(1)}%</strong><span>wants as income share</span></div>
+            <div class="mu-moneylab-compare"><strong>$${left.toFixed(0)}</strong><span>left over now</span></div>
+            <div class="mu-moneylab-compare"><strong>$${improvedLeft.toFixed(0)}</strong><span>left if you cut wants & subscriptions a little</span></div>
+            <div class="mu-moneylab-compare"><strong>${wantsPct.toFixed(1)}%</strong><span>spent on fun / wants</span></div>
           </div>
           <div class="mu-moneylab-insight">
             <h3>What this means</h3>
             <p>${meaning}</p>
-            <p><strong>Why it matters:</strong> A budget is not just subtraction. It shows whether your plan has enough cushion to handle surprises.</p>
-            <p><strong>Smart next move:</strong> ${nextStep}</p>
-            <p><strong>Try changing this:</strong> Test what happens if wants or subscriptions drop by 10–25%.</p>
-            <p><strong>Habit insight:</strong> ${habit}</p>
-            <p><strong>Related review:</strong> Budgeting lessons and the Subscription Leak Detector.</p>
-            <p><strong>Reflection:</strong> Which category would you adjust first without hurting your needs?</p>
+            <p><strong>What to try:</strong> ${nextStep}</p>
           </div>
           <div class="mu-result-note">These tools provide educational estimates only. They are not financial, legal, tax, investing, banking, or career advice.</div>
         </div>`;
@@ -13671,33 +13666,33 @@ function getFreshGame() {
         <section class="mu-safetylab-card">
           <div class="mu-safetylab-header">
             <div class="mu-safetylab-title">
-              <div class="mu-pill mu-pill-success">Safety/Economics Lab</div>
-              <h2>Long-Term Growth Simulator</h2>
-              <p>Use a simplified educational model to see how starting amount, monthly contributions, time, and estimated return can affect a future value estimate.</p>
+              <div class="mu-pill mu-pill-success">Investing</div>
+              <h2>Money Growth Estimator</h2>
+              <p>See how money you save can grow over time. This is a simple example, not a prediction of real results.</p>
             </div>
-            <div class="mu-safetylab-mini-card"><strong>Not investing advice:</strong><br>This is a simplified educational estimate. Real investments can lose money. Past performance does not guarantee future results.</div>
+            <div class="mu-safetylab-mini-card"><strong>Not investing advice:</strong><br>This is just an example for learning. Real investments can lose money, and the past does not predict the future.</div>
           </div>
 
           <div class="mu-safetylab-section">
-            <h3>Enter the long-term estimate</h3>
+            <h3>Enter your numbers</h3>
             <div class="form-grid">
-              ${numberInput("Starting amount", "invest-start", 100)}
-              ${numberInput("Monthly contribution", "invest-monthly", 50)}
-              ${numberInput("Years", "invest-years", 10)}
-              ${numberInput("Estimated annual return %", "invest-rate", 7)}
+              ${numberInput("Money you start with", "invest-start", 100)}
+              ${numberInput("Money you add each month", "invest-monthly", 50)}
+              ${numberInput("Number of years", "invest-years", 10)}
+              ${numberInput("Yearly growth %", "invest-rate", 7)}
             </div>
           </div>
 
           <div class="mu-safetylab-section">
-            <h3>Contribution vs. estimated growth</h3>
-            <p>The result separates money contributed from estimated growth. It does not predict real investment results.</p>
+            <h3>Money you put in vs. growth</h3>
+            <p>The result shows how much you added yourself and how much came from growth.</p>
             <div class="mu-safetylab-breakdown">
               <div class="mu-safetylab-breakdown-card"><strong>Contributions</strong><div class="mu-safetylab-breakdown-bar"><div class="mu-safetylab-breakdown-fill" style="--value:0%"></div></div></div>
               <div class="mu-safetylab-breakdown-card"><strong>Estimated growth</strong><div class="mu-safetylab-breakdown-bar"><div class="mu-safetylab-breakdown-fill" style="--value:0%"></div></div></div>
             </div>
           </div>
 
-          <div class="actions"><button class="btn green" onclick="calculateInvesting()">Calculate Educational Estimate</button></div>
+          <div class="actions"><button class="btn green" onclick="calculateInvesting()">See How It Grows</button></div>
           <div id="invest-result"></div>
         </section>
       `);
@@ -13717,21 +13712,21 @@ function getFreshGame() {
       const growthPct = future > 0 ? Math.max(0, Math.min(100, (growth / future) * 100)) : 0;
       document.getElementById("invest-result").innerHTML = `
         <div class="mu-result-card result-card good">
-          <div class="mu-pill mu-pill-success">Educational long-term estimate</div>
+          <div class="mu-pill mu-pill-success">Example estimate</div>
           <div class="mu-result-value">$${future.toFixed(0)}</div>
           <div class="mu-safetylab-result-grid">
-            <div class="mu-safetylab-stat"><strong>$${contributed.toFixed(0)}</strong><span>total contributed</span></div>
-            <div class="mu-safetylab-stat"><strong>$${growth.toFixed(0)}</strong><span>estimated growth</span></div>
-            <div class="mu-safetylab-stat"><strong>$${future.toFixed(0)}</strong><span>estimated ending value</span></div>
+            <div class="mu-safetylab-stat"><strong>$${contributed.toFixed(0)}</strong><span>money you put in</span></div>
+            <div class="mu-safetylab-stat"><strong>$${growth.toFixed(0)}</strong><span>growth on top</span></div>
+            <div class="mu-safetylab-stat"><strong>$${future.toFixed(0)}</strong><span>total at the end</span></div>
           </div>
           <div class="mu-safetylab-breakdown">
-            <div class="mu-safetylab-breakdown-card"><strong>Contributions</strong><span>${contribPct.toFixed(1)}% of estimate</span><div class="mu-safetylab-breakdown-bar"><div class="mu-safetylab-breakdown-fill" style="--value:${contribPct}%"></div></div></div>
-            <div class="mu-safetylab-breakdown-card"><strong>Estimated growth</strong><span>${growthPct.toFixed(1)}% of estimate</span><div class="mu-safetylab-breakdown-bar"><div class="mu-safetylab-breakdown-fill" style="--value:${growthPct}%"></div></div></div>
+            <div class="mu-safetylab-breakdown-card"><strong>Money you put in</strong><span>${contribPct.toFixed(1)}% of the total</span><div class="mu-safetylab-breakdown-bar"><div class="mu-safetylab-breakdown-fill" style="--value:${contribPct}%"></div></div></div>
+            <div class="mu-safetylab-breakdown-card"><strong>Growth</strong><span>${growthPct.toFixed(1)}% of the total</span><div class="mu-safetylab-breakdown-bar"><div class="mu-safetylab-breakdown-fill" style="--value:${growthPct}%"></div></div></div>
           </div>
           <div class="mu-safetylab-explain">
             <h3>What this means</h3>
-            <p>Time and regular contributions can make a large difference in a simplified growth model. The estimate is not a prediction.</p>
-            <p><strong>Risk/volatility note:</strong> This is a simplified educational estimate. Real investments can lose money. Past performance does not guarantee future results.</p>
+            <p>Saving a little every month and giving it time can add up to a lot. This is just an example, not a promise.</p>
+            <p><strong>Remember:</strong> Real investments can go up or down. This tool can't predict what will actually happen.</p>
           </div>
           <div class="mu-result-note">These tools provide educational estimates only. They are not financial, legal, tax, investing, banking, or career advice. No stock-picking, crypto, or investment recommendation is being provided.</div>
         </div>`;
@@ -13743,21 +13738,21 @@ function getFreshGame() {
         <section class="mu-moneylab-card">
           <div class="mu-moneylab-header">
             <div>
-              <div class="mu-pill mu-pill-success">Money Lab • Debt Strategy</div>
-              <h2>Debt / Credit Card Cost Simulator</h2>
-              <p>Compare payoff time, estimated interest, and the impact of adding a little extra to the monthly payment.</p>
+              <div class="mu-pill mu-pill-success">Credit Cards</div>
+              <h2>Credit Card Payoff Estimator</h2>
+              <p>See how long a credit card takes to pay off and how much extra you pay in interest.</p>
             </div>
-            <div class="mu-moneylab-side-note"><strong>Watch for:</strong><br>Minimum-payment traps. Small payments can make debt last much longer.</div>
+            <div class="mu-moneylab-side-note"><strong>Watch out:</strong><br>Paying only a little each month makes a card last a lot longer and cost more.</div>
           </div>
           <div class="mu-moneylab-section">
-            <h3>Debt inputs</h3>
+            <h3>Your card</h3>
             <div class="form-grid">
-              ${numberInput("Balance", "debt-balance", 800)}
-              ${numberInput("APR %", "debt-apr", 22)}
-              ${numberInput("Monthly payment", "debt-payment", 80)}
+              ${numberInput("Amount owed", "debt-balance", 800)}
+              ${numberInput("Interest rate (APR %)", "debt-apr", 22)}
+              ${numberInput("What you pay each month", "debt-payment", 80)}
             </div>
           </div>
-          <div class="actions"><button class="btn green" onclick="calculateDebt()">Run Debt Strategy</button></div>
+          <div class="actions"><button class="btn green" onclick="calculateDebt()">See Payoff Time</button></div>
           <div id="debt-result"></div>
         </section>
       `);
@@ -13772,7 +13767,7 @@ function getFreshGame() {
       let months = 0;
       let interestPaid = 0;
       if (payment <= balance * mr) {
-        document.getElementById("debt-result").innerHTML = toolResult("Payment too low", "Not shrinking", "Payment may not cover interest enough.", false);
+        document.getElementById("debt-result").innerHTML = toolResult("Payment too low", "Never paid off", "Your monthly payment is too small to cover the interest, so the balance would never go down. Try paying more each month.", false);
         return;
       }
       while (b > 0 && months < 600) {
@@ -13802,28 +13797,24 @@ function getFreshGame() {
       const status = costRatio > 50 ? "Danger zone" : costRatio > 20 ? "Expensive" : "Manageable";
       document.getElementById("debt-result").innerHTML = `
         <div class="mu-result-card result-card ${costRatio > 50 ? "caution" : "good"}">
-          <div class="mu-pill ${costRatio > 50 ? "mu-pill-warning" : "mu-pill-success"}">Debt cost rating: ${status}</div>
+          <div class="mu-pill ${costRatio > 50 ? "mu-pill-warning" : "mu-pill-success"}">Cost: ${status}</div>
           <div class="mu-result-value">${months} months</div>
           <div class="mu-moneylab-meter"><div class="mu-moneylab-meter-fill" style="--value:${meter}%"></div></div>
           <div class="mu-moneylab-meter-labels"><span>Manageable</span><span>Expensive</span><span>Danger</span></div>
           <div class="mu-moneylab-result-grid">
-            <div class="mu-moneylab-stat"><strong>$${interestPaid.toFixed(0)}</strong><span>estimated interest</span></div>
-            <div class="mu-moneylab-stat"><strong>${months2}</strong><span>months with +$25 payment</span></div>
-            <div class="mu-moneylab-stat"><strong>$${savedInterest.toFixed(0)}</strong><span>estimated interest saved</span></div>
+            <div class="mu-moneylab-stat"><strong>$${interestPaid.toFixed(0)}</strong><span>extra paid in interest</span></div>
+            <div class="mu-moneylab-stat"><strong>${months2}</strong><span>months if you add $25/month</span></div>
+            <div class="mu-moneylab-stat"><strong>$${savedInterest.toFixed(0)}</strong><span>interest saved by adding $25</span></div>
           </div>
           <div class="mu-moneylab-comparison-grid">
-            <div class="mu-moneylab-compare"><strong>$${payment.toFixed(0)}</strong><span>current payment</span></div>
-            <div class="mu-moneylab-compare"><strong>$${extraPayment.toFixed(0)}</strong><span>extra-payment scenario</span></div>
-            <div class="mu-moneylab-compare"><strong>${monthsSaved}</strong><span>months saved estimate</span></div>
+            <div class="mu-moneylab-compare"><strong>$${payment.toFixed(0)}</strong><span>paying this each month</span></div>
+            <div class="mu-moneylab-compare"><strong>$${extraPayment.toFixed(0)}</strong><span>if you paid this instead</span></div>
+            <div class="mu-moneylab-compare"><strong>${monthsSaved}</strong><span>months you'd save</span></div>
           </div>
           <div class="mu-moneylab-insight">
             <h3>What this means</h3>
-            <p>The payoff estimate is ${months} months with about $${interestPaid.toFixed(0)} in interest.</p>
-            <p><strong>Why it matters:</strong> Interest is the cost of borrowing. A small extra payment can reduce time and total interest.</p>
-            <p><strong>Smart next move:</strong> Test a higher payment before taking on more debt.</p>
-            <p><strong>Try changing this:</strong> Increase the monthly payment by $25 or lower the balance.</p>
-            <p><strong>Related review:</strong> Credit and Budget Lab.</p>
-            <p><strong>Reflection:</strong> Why can paying only the minimum make debt more expensive?</p>
+            <p>At this payment, the card takes ${months} months to pay off and costs about $${interestPaid.toFixed(0)} extra in interest.</p>
+            <p><strong>What to try:</strong> Paying just $25 more each month pays it off faster and saves money.</p>
           </div>
           <div class="mu-result-note">These tools provide educational estimates only. They are not financial, legal, tax, investing, banking, or career advice.</div>
         </div>`;
@@ -13835,14 +13826,14 @@ function getFreshGame() {
         <section class="mu-moneylab-card">
           <div class="mu-moneylab-header">
             <div>
-              <div class="mu-pill mu-pill-success">Money Lab • Future Cost Projector</div>
-              <h2>Future Price Shock Simulator</h2>
-              <p>Project how a price might change over time and see the difference between today’s cost and future estimated cost.</p>
+              <div class="mu-pill mu-pill-success">Inflation</div>
+              <h2>Future Price Estimator</h2>
+              <p>Prices usually go up over time. See about how much something might cost a few years from now.</p>
             </div>
-            <div class="mu-moneylab-side-note"><strong>Use this for:</strong><br>Food, gas, rent, car insurance, phone plans, college supplies, or custom expenses.</div>
+            <div class="mu-moneylab-side-note"><strong>Use this for:</strong><br>Food, gas, rent, phone plans, college supplies, or anything else you buy.</div>
           </div>
           <div class="mu-moneylab-section">
-            <h3>Category presets</h3>
+            <h3>Try an example</h3>
             <div class="mu-moneylab-scenario-grid">
               <button class="mu-moneylab-scenario" type="button" onclick="document.getElementById('inflation-cost').value='80';document.getElementById('inflation-rate').value='4';document.getElementById('inflation-years').value='5'"><strong>Food</strong><span>weekly groceries</span></button>
               <button class="mu-moneylab-scenario" type="button" onclick="document.getElementById('inflation-cost').value='45';document.getElementById('inflation-rate').value='5';document.getElementById('inflation-years').value='4'"><strong>Gas</strong><span>transportation cost</span></button>
@@ -13851,14 +13842,14 @@ function getFreshGame() {
             </div>
           </div>
           <div class="mu-moneylab-section">
-            <h3>Future price inputs</h3>
+            <h3>Your numbers</h3>
             <div class="form-grid">
-              ${numberInput("Cost today", "inflation-cost", 100)}
-              ${numberInput("Inflation %", "inflation-rate", 3)}
-              ${numberInput("Years", "inflation-years", 10)}
+              ${numberInput("What it costs today", "inflation-cost", 100)}
+              ${numberInput("Price rise per year (%)", "inflation-rate", 3)}
+              ${numberInput("Years from now", "inflation-years", 10)}
             </div>
           </div>
-          <div class="actions"><button class="btn green" onclick="calculateInflation()">Project Future Cost</button></div>
+          <div class="actions"><button class="btn green" onclick="calculateInflation()">See Future Price</button></div>
           <div id="inflation-result"></div>
         </section>
       `);
@@ -13872,26 +13863,22 @@ function getFreshGame() {
       const difference = future - today;
       const shockPct = today > 0 ? (difference / today) * 100 : 0;
       const meter = Math.min(100, Math.max(0, Math.round(shockPct)));
-      const rating = shockPct > 50 ? "High future shock" : shockPct > 20 ? "Moderate future shock" : "Low future shock";
+      const rating = shockPct > 50 ? "Big jump" : shockPct > 20 ? "Medium jump" : "Small jump";
       document.getElementById("inflation-result").innerHTML = `
         <div class="mu-result-card result-card ${shockPct > 50 ? "caution" : "good"}">
           <div class="mu-pill ${shockPct > 50 ? "mu-pill-warning" : "mu-pill-success"}">${rating}</div>
           <div class="mu-result-value">$${future.toFixed(2)}</div>
           <div class="mu-moneylab-meter"><div class="mu-moneylab-meter-fill" style="--value:${meter}%"></div></div>
-          <div class="mu-moneylab-meter-labels"><span>Low</span><span>Moderate</span><span>High shock</span></div>
+          <div class="mu-moneylab-meter-labels"><span>Small</span><span>Medium</span><span>Big jump</span></div>
           <div class="mu-moneylab-result-grid">
-            <div class="mu-moneylab-stat"><strong>$${today.toFixed(2)}</strong><span>today’s price</span></div>
-            <div class="mu-moneylab-stat"><strong>$${difference.toFixed(2)}</strong><span>increase estimate</span></div>
-            <div class="mu-moneylab-stat"><strong>${shockPct.toFixed(1)}%</strong><span>price change</span></div>
+            <div class="mu-moneylab-stat"><strong>$${today.toFixed(2)}</strong><span>price today</span></div>
+            <div class="mu-moneylab-stat"><strong>$${difference.toFixed(2)}</strong><span>how much it goes up</span></div>
+            <div class="mu-moneylab-stat"><strong>${shockPct.toFixed(1)}%</strong><span>total increase</span></div>
           </div>
           <div class="mu-moneylab-insight">
             <h3>What this means</h3>
-            <p>At ${rate}% inflation for ${years} years, $${today.toFixed(2)} becomes about $${future.toFixed(2)}.</p>
-            <p><strong>Why it matters:</strong> Inflation can make future goals more expensive even when the item looks the same.</p>
-            <p><strong>Smart next move:</strong> Build extra cushion into long-term goals.</p>
-            <p><strong>Try changing this:</strong> Change the number of years or inflation rate to see how sensitive the estimate is.</p>
-            <p><strong>Related review:</strong> Cost of Money and Goal Lab.</p>
-            <p><strong>Reflection:</strong> What expense in your life would be hardest if the price rose 20%?</p>
+            <p>If prices rise ${rate}% a year, in ${years} years $${today.toFixed(2)} would cost about $${future.toFixed(2)}.</p>
+            <p><strong>What to try:</strong> For long-term goals, save a little extra so rising prices don't catch you off guard.</p>
           </div>
           <div class="mu-result-note">These tools provide educational estimates only. They are not financial, legal, tax, investing, banking, or career advice.</div>
         </div>`;
@@ -13903,22 +13890,22 @@ function getFreshGame() {
         <section class="mu-moneylab-card">
           <div class="mu-moneylab-header">
             <div>
-              <div class="mu-pill mu-pill-success">Money Lab • Paycheck Analyzer</div>
-              <h2>Paycheck Breakdown Simulator</h2>
-              <p>See gross pay, estimated deductions, take-home pay, and a monthly planning estimate in one dashboard.</p>
+              <div class="mu-pill mu-pill-success">Paycheck</div>
+              <h2>Paycheck Breakdown</h2>
+              <p>Your paycheck isn't all yours to keep. See how much you actually take home after taxes and other deductions.</p>
             </div>
-            <div class="mu-moneylab-side-note"><strong>Lesson:</strong><br>Gross pay is not the same as net pay. Planning should use estimated take-home pay.</div>
+            <div class="mu-moneylab-side-note"><strong>Good to know:</strong><br>The pay you earn (before deductions) is more than the pay you take home. Plan with the take-home number.</div>
           </div>
           <div class="mu-moneylab-section">
-            <h3>Paycheck inputs</h3>
+            <h3>Your job</h3>
             <div class="form-grid">
-              ${numberInput("Hourly wage", "pay-wage", 15)}
-              ${numberInput("Hours", "pay-hours", 20)}
-              ${numberInput("Deductions %", "pay-deductions", 18)}
+              ${numberInput("Pay per hour ($)", "pay-wage", 15)}
+              ${numberInput("Hours per week", "pay-hours", 20)}
+              ${numberInput("Taken out for taxes, etc. (%)", "pay-deductions", 18)}
             </div>
-            <p class="mu-helper-text">Pay frequency is shown as a planning estimate below. This tool keeps the existing gross/net formula.</p>
+            <p class="mu-helper-text">Not sure about the percentage taken out? Around 15-20% is a common estimate for a first job.</p>
           </div>
-          <div class="actions"><button class="btn green" onclick="calculatePaycheck()">Analyze Paycheck</button></div>
+          <div class="actions"><button class="btn green" onclick="calculatePaycheck()">See My Take-Home Pay</button></div>
           <div id="paycheck-result"></div>
         </section>
       `);
@@ -13939,22 +13926,18 @@ function getFreshGame() {
           <div class="mu-pill mu-pill-success">Estimated take-home pay</div>
           <div class="mu-result-value">$${net.toFixed(2)}</div>
           <div class="mu-moneylab-result-grid">
-            <div class="mu-moneylab-stat"><strong>$${gross.toFixed(2)}</strong><span>gross pay</span></div>
-            <div class="mu-moneylab-stat"><strong>$${deductions.toFixed(2)}</strong><span>estimated deductions</span></div>
-            <div class="mu-moneylab-stat"><strong>$${monthly.toFixed(2)}</strong><span>monthly estimate</span></div>
+            <div class="mu-moneylab-stat"><strong>$${gross.toFixed(2)}</strong><span>earned before deductions</span></div>
+            <div class="mu-moneylab-stat"><strong>$${deductions.toFixed(2)}</strong><span>taken out</span></div>
+            <div class="mu-moneylab-stat"><strong>$${monthly.toFixed(2)}</strong><span>take-home for a month</span></div>
           </div>
           <div class="mu-moneylab-bar-stack">
-            <div class="mu-moneylab-bar-row"><span>Take-home</span><div class="mu-moneylab-bar"><div class="mu-moneylab-bar-fill" style="--value:${netShare}%"></div></div><strong>${netShare}%</strong></div>
-            <div class="mu-moneylab-bar-row"><span>Deductions</span><div class="mu-moneylab-bar"><div class="mu-moneylab-bar-fill" style="--value:${deductionShare}%"></div></div><strong>${deductionShare}%</strong></div>
+            <div class="mu-moneylab-bar-row"><span>You keep</span><div class="mu-moneylab-bar"><div class="mu-moneylab-bar-fill" style="--value:${netShare}%"></div></div><strong>${netShare}%</strong></div>
+            <div class="mu-moneylab-bar-row"><span>Taken out</span><div class="mu-moneylab-bar"><div class="mu-moneylab-bar-fill" style="--value:${deductionShare}%"></div></div><strong>${deductionShare}%</strong></div>
           </div>
           <div class="mu-moneylab-insight">
             <h3>What this means</h3>
-            <p>Your gross pay is $${gross.toFixed(2)}, but estimated take-home pay is $${net.toFixed(2)} after deductions.</p>
-            <p><strong>Why it matters:</strong> Budgets should usually be planned from take-home pay, not gross pay.</p>
-            <p><strong>Smart next move:</strong> Use the monthly estimate in the Budget Lab.</p>
-            <p><strong>Try changing this:</strong> Change hours worked or deduction percentage to see how the paycheck changes.</p>
-            <p><strong>Related review:</strong> Money & Income and Budgeting.</p>
-            <p><strong>Reflection:</strong> How would using gross pay instead of net pay make a budget misleading?</p>
+            <p>You earn $${gross.toFixed(2)}, but you actually take home $${net.toFixed(2)} after taxes and other deductions.</p>
+            <p><strong>What to try:</strong> When you make a budget, use your take-home pay, not the bigger number.</p>
           </div>
           <div class="mu-result-note">These tools provide educational estimates only. They are not financial, legal, tax, investing, banking, or career advice.</div>
         </div>`;
@@ -13966,14 +13949,14 @@ function getFreshGame() {
         <section class="mu-moneylab-card">
           <div class="mu-moneylab-header">
             <div>
-              <div class="mu-pill mu-pill-success">Money Lab • Goal Planner</div>
-              <h2>Goal Builder</h2>
-              <p>Turn a goal into a clear timeline, weekly target, monthly target, progress meter, and next-move plan.</p>
+              <div class="mu-pill mu-pill-success">Savings</div>
+              <h2>Savings Goal Planner</h2>
+              <p>Tell it what you're saving for. It shows how much to put away each week and month to get there.</p>
             </div>
-            <div class="mu-moneylab-side-note"><strong>Use this when:</strong><br>You want to know how to actually hit a savings goal instead of just wishing for it.</div>
+            <div class="mu-moneylab-side-note"><strong>Use this when:</strong><br>You want a real plan to reach a goal, not just a hope.</div>
           </div>
           <div class="mu-moneylab-section">
-            <h3>Goal type presets</h3>
+            <h3>Try an example</h3>
             <div class="mu-moneylab-scenario-grid">
               <button class="mu-moneylab-scenario" type="button" onclick="document.getElementById('savings-goal-name').value='car fund';document.getElementById('savings-goal-amount').value='2500';document.getElementById('savings-current').value='400';document.getElementById('savings-months').value='12'"><strong>Car</strong><span>Big goal timeline</span></button>
               <button class="mu-moneylab-scenario" type="button" onclick="document.getElementById('savings-goal-name').value='phone';document.getElementById('savings-goal-amount').value='700';document.getElementById('savings-current').value='150';document.getElementById('savings-months').value='6'"><strong>Phone</strong><span>Medium goal</span></button>
@@ -13982,18 +13965,18 @@ function getFreshGame() {
             </div>
           </div>
           <div class="mu-moneylab-section">
-            <h3>Goal inputs</h3>
+            <h3>Your goal</h3>
             <div class="form-grid">
-              ${textInput("Goal name", "savings-goal-name", "new phone")}
-              ${numberInput("Goal amount", "savings-goal-amount", 600)}
-              ${numberInput("Current savings", "savings-current", 150)}
-              ${numberInput("Target timeline in months", "savings-months", 6)}
-              ${numberInput("Monthly income or allowance (optional)", "savings-income", 200)}
-              ${numberInput("Monthly spending (optional)", "savings-spending", 80)}
+              ${textInput("What are you saving for?", "savings-goal-name", "new phone")}
+              ${numberInput("How much it costs", "savings-goal-amount", 600)}
+              ${numberInput("How much you've saved already", "savings-current", 150)}
+              ${numberInput("Months until you want it", "savings-months", 6)}
+              ${numberInput("Money you get each month (optional)", "savings-income", 200)}
+              ${numberInput("Money you spend each month (optional)", "savings-spending", 80)}
             </div>
           </div>
           <div class="actions">
-            <button class="btn green" onclick="calculateSavingsGoal()">Build Goal Plan</button>
+            <button class="btn green" onclick="calculateSavingsGoal()">Make My Plan</button>
             <button class="btn light" onclick="resetSavingsGoal()">Reset</button>
           </div>
           <div id="savings-result"></div>
@@ -14052,29 +14035,25 @@ function getFreshGame() {
 
       result.innerHTML = `
         <div class="mu-result-card result-card ${statusGood ? "good" : "caution"}">
-          <div class="mu-pill ${statusGood ? "mu-pill-success" : "mu-pill-warning"}">Goal status: ${status}</div>
-          <div class="mu-result-value">$${remaining.toFixed(2)} left</div>
+          <div class="mu-pill ${statusGood ? "mu-pill-success" : "mu-pill-warning"}">${status}</div>
+          <div class="mu-result-value">$${remaining.toFixed(2)} to go</div>
           <div class="mu-moneylab-meter"><div class="mu-moneylab-meter-fill" style="--value:${progressPct}%"></div></div>
-          <div class="mu-moneylab-meter-labels"><span>Starting</span><span>Progress</span><span>Goal reached</span></div>
+          <div class="mu-moneylab-meter-labels"><span>Start</span><span>Halfway</span><span>Done</span></div>
           <div class="mu-moneylab-result-grid">
-            <div class="mu-moneylab-stat"><strong>$${monthly.toFixed(2)}</strong><span>save per month</span></div>
-            <div class="mu-moneylab-stat"><strong>$${weekly.toFixed(2)}</strong><span>save per week</span></div>
-            ${percentLine || `<div class="mu-moneylab-stat"><strong>${progressPct}%</strong><span>current progress</span></div>`}
+            <div class="mu-moneylab-stat"><strong>$${monthly.toFixed(2)}</strong><span>save each month</span></div>
+            <div class="mu-moneylab-stat"><strong>$${weekly.toFixed(2)}</strong><span>save each week</span></div>
+            ${percentLine || `<div class="mu-moneylab-stat"><strong>${progressPct}%</strong><span>done so far</span></div>`}
           </div>
           <div class="mu-moneylab-tradeoff-grid">
-            <div class="mu-moneylab-tradeoff"><strong>+$10/week</strong><span>could finish in about ${fasterMonths} months</span></div>
-            <div class="mu-moneylab-tradeoff"><strong>Cut $15/month</strong><span>could finish in about ${cutSubMonths} months</span></div>
-            <div class="mu-moneylab-tradeoff"><strong>Delay 1 month</strong><span>target drops to $${(remaining / (months + 1)).toFixed(2)}/month</span></div>
-            <div class="mu-moneylab-tradeoff"><strong>Compare cost</strong><span>a cheaper version lowers the weekly target</span></div>
+            <div class="mu-moneylab-tradeoff"><strong>+$10/week</strong><span>done in about ${fasterMonths} months</span></div>
+            <div class="mu-moneylab-tradeoff"><strong>Cut $15/month of spending</strong><span>done in about ${cutSubMonths} months</span></div>
+            <div class="mu-moneylab-tradeoff"><strong>Wait 1 more month</strong><span>only $${(remaining / (months + 1)).toFixed(2)}/month needed</span></div>
+            <div class="mu-moneylab-tradeoff"><strong>Pick a cheaper option</strong><span>lowers your weekly target</span></div>
           </div>
           <div class="mu-moneylab-insight">
             <h3>What this means</h3>
             <p>${feedback}</p>
-            <p><strong>Why it matters:</strong> Goals become easier when the timeline and weekly target are visible.</p>
-            <p><strong>Smart next move:</strong> Set up a weekly savings habit or lower the goal cost if the target is too tight.</p>
-            <p><strong>Try changing this:</strong> Add $10/week, cut one subscription, or delay the purchase one month.</p>
-            <p><strong>Related review:</strong> Goal Lab and Budget Lab.</p>
-            <p><strong>Reflection:</strong> What small weekly habit would make this goal easier?</p>
+            <p><strong>What to try:</strong> Saving the same small amount every week is the easiest way to get there.</p>
           </div>
           <div class="mu-result-note">These tools provide educational estimates only. They are not financial, legal, tax, investing, banking, or career advice.</div>
         </div>
@@ -14097,15 +14076,15 @@ function getFreshGame() {
         <section class="mu-budgetlab-card">
           <div class="mu-budgetlab-header">
             <div class="mu-budgetlab-title">
-              <div class="mu-pill mu-pill-success">Budget Lab</div>
-              <h2>Subscription Leak Detector</h2>
-              <p>Monthly charges can feel small, but they repeat. Add a few subscriptions to see monthly cost, yearly cost, and what canceling one could free up.</p>
+              <div class="mu-pill mu-pill-success">Subscriptions</div>
+              <h2>Subscription Cost Checker</h2>
+              <p>$10 here, $15 there — it adds up. Add your subscriptions to see what they really cost per year.</p>
             </div>
-            <div class="mu-budgetlab-mini-card"><strong>Quiet cost check:</strong><br>Use this for music, video, gaming, gym, cloud storage, food delivery, or custom subscriptions.</div>
+            <div class="mu-budgetlab-mini-card"><strong>Try it with:</strong><br>Music, video streaming, gaming, gym, cloud storage, or food delivery.</div>
           </div>
           <div class="mu-budgetlab-section">
-            <h3>Common subscription examples</h3>
-            <p>Use these as examples, or type your own names and costs below.</p>
+            <h3>Quick examples</h3>
+            <p>Tap one to fill it in, or type your own below.</p>
             <div class="mu-budgetlab-chip-grid">
               <button class="mu-budgetlab-chip" type="button" onclick="document.getElementById('sub-name-1').value='music app';document.getElementById('sub-cost-1').value='10'"><strong>Music</strong><br><span>$10/month example</span></button>
               <button class="mu-budgetlab-chip" type="button" onclick="document.getElementById('sub-name-2').value='video streaming';document.getElementById('sub-cost-2').value='16'"><strong>Video</strong><br><span>$16/month example</span></button>
@@ -14116,22 +14095,22 @@ function getFreshGame() {
             <h3>Your subscription list</h3>
             <div class="form-grid mu-budgetlab-input-grid">
               ${textInput("Subscription 1 name", "sub-name-1", "music app")}
-              ${numberInput("Subscription 1 monthly cost", "sub-cost-1", 10)}
+              ${numberInput("Subscription 1 cost per month", "sub-cost-1", 10)}
               ${textInput("Subscription 2 name", "sub-name-2", "streaming")}
-              ${numberInput("Subscription 2 monthly cost", "sub-cost-2", 15)}
+              ${numberInput("Subscription 2 cost per month", "sub-cost-2", 15)}
               ${textInput("Subscription 3 name", "sub-name-3", "gaming pass")}
-              ${numberInput("Subscription 3 monthly cost", "sub-cost-3", 11)}
-              ${numberInput("Monthly income or allowance (optional)", "sub-income", 200)}
+              ${numberInput("Subscription 3 cost per month", "sub-cost-3", 11)}
+              ${numberInput("Money you get each month (optional)", "sub-income", 200)}
             </div>
           </div>
           <div class="mu-budgetlab-section">
-            <h3>Money leak meter</h3>
-            <p>The result will compare keeping all subscriptions with canceling a small or expensive one.</p>
+            <h3>How much is it adding up to?</h3>
+            <p>The result shows your total and how much you'd save by canceling one.</p>
             <div class="mu-budgetlab-meter"><div class="mu-budgetlab-meter-fill" style="--value:0%"></div></div>
-            <div class="mu-budgetlab-meter-labels"><span>Small leak</span><span>Noticeable</span><span>High recurring cost</span></div>
+            <div class="mu-budgetlab-meter-labels"><span>A little</span><span>Noticeable</span><span>A lot</span></div>
           </div>
           <div class="actions">
-            <button class="btn green" onclick="calculateSubscriptionCost()">Find Subscription Leak</button>
+            <button class="btn green" onclick="calculateSubscriptionCost()">Add It Up</button>
             <button class="btn light" onclick="resetSubscriptionCost()">Reset</button>
           </div>
           <div id="subscription-result"></div>
@@ -14181,32 +14160,32 @@ function getFreshGame() {
       let feedback = `These subscriptions cost $${monthlyTotal.toFixed(2)}/month, which is $${yearlyTotal.toFixed(2)}/year.`;
       if (income !== null && income > 0) {
         const percent = (monthlyTotal / income) * 100;
-        incomeLine = `<p><strong>Percent of monthly income:</strong> ${percent.toFixed(1)}%</p>`;
-        if (percent > 25) feedback = `If your monthly income is $${income.toFixed(2)}, subscriptions take ${percent.toFixed(1)}% of it. That may be a lot for recurring payments.`;
-        else feedback = `If your monthly income is $${income.toFixed(2)}, subscriptions take ${percent.toFixed(1)}% of it.`;
+        incomeLine = `<p><strong>That's ${percent.toFixed(1)}% of the money you get each month.</strong></p>`;
+        if (percent > 25) feedback = `Your subscriptions take ${percent.toFixed(1)}% of your monthly money. That's a big chunk for things that bill you automatically.`;
+        else feedback = `Your subscriptions take ${percent.toFixed(1)}% of your monthly money.`;
       }
 
       result.innerHTML = `
         <div class="mu-result-card result-card ${leakMeter > 70 ? "caution" : "good"}">
-          <div class="mu-pill ${leakMeter > 70 ? "mu-pill-warning" : "mu-pill-success"}">Subscription leak snapshot</div>
+          <div class="mu-pill ${leakMeter > 70 ? "mu-pill-warning" : "mu-pill-success"}">Your subscriptions</div>
           <div class="mu-result-value">$${monthlyTotal.toFixed(2)}/month</div>
           <div class="mu-budgetlab-meter"><div class="mu-budgetlab-meter-fill" style="--value:${leakMeter}%"></div></div>
-          <div class="mu-budgetlab-meter-labels"><span>Small leak</span><span>Noticeable</span><span>High recurring cost</span></div>
+          <div class="mu-budgetlab-meter-labels"><span>A little</span><span>Noticeable</span><span>A lot</span></div>
           <div class="mu-budgetlab-result-grid">
-            <div class="mu-budgetlab-result-stat"><strong>$${yearlyTotal.toFixed(2)}</strong><span>yearly cost if kept</span></div>
+            <div class="mu-budgetlab-result-stat"><strong>$${yearlyTotal.toFixed(2)}</strong><span>cost for a year</span></div>
             <div class="mu-budgetlab-result-stat"><strong>$${threeYearTotal.toFixed(2)}</strong><span>cost over 3 years</span></div>
-            <div class="mu-budgetlab-result-stat"><strong>$${cancelYearly.toFixed(2)}</strong><span>yearly savings if highest is canceled</span></div>
+            <div class="mu-budgetlab-result-stat"><strong>$${cancelYearly.toFixed(2)}</strong><span>saved per year if you drop the priciest</span></div>
           </div>
           ${incomeLine}
           <div class="mu-budgetlab-comparison">
-            <div class="mu-budgetlab-compare-card"><strong>Keep all subscriptions</strong><span>$${yearlyTotal.toFixed(2)}/year stays in recurring costs.</span></div>
-            <div class="mu-budgetlab-compare-card"><strong>Cancel one small subscription</strong><span>Canceling ${escapeHtml(cheapest.name)} could save $${cancelSmallYearly.toFixed(2)}/year.</span></div>
-            <div class="mu-budgetlab-compare-card"><strong>Cancel one expensive subscription</strong><span>Canceling ${escapeHtml(highest.name)} could save $${cancelYearly.toFixed(2)}/year.</span></div>
+            <div class="mu-budgetlab-compare-card"><strong>Keep them all</strong><span>$${yearlyTotal.toFixed(2)} a year.</span></div>
+            <div class="mu-budgetlab-compare-card"><strong>Drop the cheapest</strong><span>Canceling ${escapeHtml(cheapest.name)} saves $${cancelSmallYearly.toFixed(2)} a year.</span></div>
+            <div class="mu-budgetlab-compare-card"><strong>Drop the priciest</strong><span>Canceling ${escapeHtml(highest.name)} saves $${cancelYearly.toFixed(2)} a year.</span></div>
           </div>
           <div class="mu-budgetlab-decision">
             <h3>What this means</h3>
             <p>${feedback}</p>
-            <p><strong>Try this:</strong> Review which subscriptions you actually use every week. Canceling one unused subscription can free up money without changing your main needs.</p>
+            <p><strong>What to try:</strong> Look for one you don't really use and cancel it. That money goes back in your pocket every month.</p>
           </div>
           <div class="mu-result-note">These tools provide educational estimates only and are not financial, legal, tax, investing, banking, or career advice.</div>
         </div>
@@ -14245,23 +14224,23 @@ function getFreshGame() {
         <section class="mu-safetylab-card">
           <div class="mu-safetylab-header">
             <div class="mu-safetylab-title">
-              <div class="mu-pill mu-pill-success">Safety/Economics Lab</div>
-              <h2>Scam Risk Detector</h2>
-              <p>Practice spotting warning signs in suspicious money messages, fake offers, links, prize claims, or pressure tactics.</p>
+              <div class="mu-pill mu-pill-success">Safety</div>
+              <h2>Scam Risk Checker</h2>
+              <p>Scammers use the same tricks over and over. Practice spotting the warning signs in a fishy message.</p>
             </div>
-            <div class="mu-safetylab-mini-card"><strong>Safety reminder:</strong><br>This tool is educational only. It cannot confirm that a real message is safe.</div>
+            <div class="mu-safetylab-mini-card"><strong>Reminder:</strong><br>This is for practice. It can't promise a real message is safe — when in doubt, ask an adult you trust.</div>
           </div>
 
           <div class="mu-safetylab-section">
-            <h3>Practice message preview</h3>
+            <h3>Example message</h3>
             <div class="mu-safetylab-preview">
               “You won a reward. Click this link now and pay a small fee to claim it before midnight. Do not tell anyone.”
             </div>
-            <p class="helper-note">Do not enter passwords, login codes, bank information, card numbers, Social Security numbers, addresses, or private personal details into this tool.</p>
+            <p class="helper-note">Never type real passwords, codes, bank info, card numbers, or other private details into this tool.</p>
           </div>
 
           <div class="mu-safetylab-section">
-            <h3>Common red flag tags</h3>
+            <h3>Common warning signs</h3>
             <div class="mu-safetylab-tag-grid">
               <div class="mu-safetylab-tag">Urgent pressure</div>
               <div class="mu-safetylab-tag">Too good to be true</div>
@@ -14273,7 +14252,7 @@ function getFreshGame() {
           </div>
 
           <div class="mu-safetylab-section">
-            <h3>Check the warning signs</h3>
+            <h3>Check anything the message does</h3>
             <div class="stack" style="margin-top:16px">
               ${scamRedFlags.map(flag => `
                 <label class="choice">
@@ -14326,22 +14305,21 @@ function getFreshGame() {
       const nextStep = scamNextStep(risk, count, seriousCount);
       result.innerHTML = `
         <div class="mu-result-card result-card ${risk === "Low" ? "good" : "caution"}">
-          <div class="mu-pill ${risk === "Low" ? "mu-pill-success" : "mu-pill-warning"}">Scam risk score: ${risk} risk</div>
+          <div class="mu-pill ${risk === "Low" ? "mu-pill-success" : "mu-pill-warning"}">${risk} risk</div>
           <div class="mu-result-value">${score}/100</div>
           <div class="mu-safetylab-meter"><div class="mu-safetylab-meter-fill" style="--value:${score}%"></div></div>
-          <div class="mu-safetylab-meter-labels"><span>Low risk</span><span>Medium risk</span><span>High risk</span></div>
+          <div class="mu-safetylab-meter-labels"><span>Low</span><span>Medium</span><span>High</span></div>
           <div class="mu-safetylab-result-grid">
-            <div class="mu-safetylab-stat"><strong>${count}</strong><span>red flags selected</span></div>
-            <div class="mu-safetylab-stat"><strong>${seriousCount}</strong><span>serious warning signs</span></div>
+            <div class="mu-safetylab-stat"><strong>${count}</strong><span>warning signs you checked</span></div>
+            <div class="mu-safetylab-stat"><strong>${seriousCount}</strong><span>serious ones</span></div>
             <div class="mu-safetylab-stat"><strong>${risk}</strong><span>risk level</span></div>
           </div>
           <div class="mu-safetylab-explain">
             <h3>What to do next</h3>
             <p>${nextStep}</p>
-            <p><strong>Parent-safe guidance:</strong> If a message asks for money, passwords, login codes, bank details, gift cards, crypto, or private information, pause and ask a trusted adult before doing anything.</p>
-            <p><strong>Educational explanation:</strong> ${scamExplanation(risk, count, seriousCount)}</p>
+            <p><strong>Simple rule:</strong> If a message asks for money, passwords, codes, gift cards, or private info, stop and ask a trusted adult first.</p>
           </div>
-          <h3>Selected warning signs</h3>
+          <h3>Warning signs you checked</h3>
           ${warningList}
           <div class="mu-safetylab-warning">This checker is for learning and safety practice. It cannot guarantee whether something is safe or unsafe.</div>
         </div>
@@ -14389,26 +14367,26 @@ function getFreshGame() {
         <section class="mu-budgetlab-card">
           <div class="mu-budgetlab-header">
             <div class="mu-budgetlab-title">
-              <div class="mu-pill mu-pill-success">Budget Lab</div>
-              <h2>Buy / Wait / Adjust Decision Score</h2>
-              <p>Slow down before a big purchase. This checklist compares cost, savings impact, monthly income, goals, and warning signs.</p>
+              <div class="mu-pill mu-pill-success">Big Purchase</div>
+              <h2>Should I Buy It?</h2>
+              <p>Before spending on something big, answer a few questions. You'll get a score that says buy, wait, or rethink it.</p>
             </div>
-            <div class="mu-budgetlab-mini-card"><strong>Use this before buying:</strong><br>Phones, headphones, shoes, gear, trips, gaming items, or anything that changes your savings.</div>
+            <div class="mu-budgetlab-mini-card"><strong>Use this before buying:</strong><br>Phones, headphones, shoes, gear, trips, games — anything pricey.</div>
           </div>
           <div class="mu-budgetlab-section">
-            <h3>Purchase details</h3>
+            <h3>What you're buying</h3>
             <div class="form-grid mu-budgetlab-input-grid">
-              ${textInput("Item name", "purchase-item", "new headphones")}
-              ${numberInput("Item cost", "purchase-cost", 120)}
-              ${numberInput("Current savings", "purchase-savings", 300)}
-              ${numberInput("Monthly income/allowance", "purchase-income", 200)}
-              ${numberInput("Monthly spending", "purchase-spending", 80)}
-              ${numberInput("Savings goal amount (optional)", "purchase-goal", 500)}
+              ${textInput("What is it?", "purchase-item", "new headphones")}
+              ${numberInput("How much it costs", "purchase-cost", 120)}
+              ${numberInput("How much you've saved", "purchase-savings", 300)}
+              ${numberInput("Money you get each month", "purchase-income", 200)}
+              ${numberInput("Money you spend each month", "purchase-spending", 80)}
+              ${numberInput("A savings goal you have (optional)", "purchase-goal", 500)}
             </div>
           </div>
           <div class="mu-budgetlab-section">
-            <h3>Decision checklist</h3>
-            <p>Check anything that applies. Honest answers make the score more useful.</p>
+            <h3>Quick questions</h3>
+            <p>Check the ones that are true. Be honest — it makes the score more useful.</p>
             <div class="stack" style="margin-top:16px">
               ${bigPurchaseQuestions.map(q => `
                 <label class="choice">
@@ -14419,19 +14397,19 @@ function getFreshGame() {
             </div>
           </div>
           <div class="mu-budgetlab-section">
-            <h3>Needs vs. wants meter</h3>
-            <p>The result will estimate whether the purchase looks like a safer buy, a wait, or a plan that needs adjusting.</p>
+            <h3>Your score</h3>
+            <p>The result tells you if it looks okay to buy, better to wait, or worth rethinking.</p>
             <div class="mu-budgetlab-meter"><div class="mu-budgetlab-meter-fill" style="--value:0%"></div></div>
-            <div class="mu-budgetlab-meter-labels"><span>Wait</span><span>Adjust</span><span>Buy</span></div>
+            <div class="mu-budgetlab-meter-labels"><span>Wait</span><span>Rethink</span><span>Buy</span></div>
           </div>
           <div class="actions">
-            <button class="btn green" onclick="checkBigPurchaseDecision()">Check Decision Score</button>
+            <button class="btn green" onclick="checkBigPurchaseDecision()">Should I Buy It?</button>
             <button class="btn light" onclick="resetBigPurchaseDecision()">Reset</button>
           </div>
           <div id="purchase-result"></div>
           <div class="mu-budgetlab-section">
-            <h3>Reflection before buying</h3>
-            <p>If you waited 7 days, would you still want this purchase as much as you do right now?</p>
+            <h3>One more thing</h3>
+            <p>If you waited a week, would you still want it as much as you do right now?</p>
           </div>
         </section>
       `);
@@ -14499,25 +14477,23 @@ function getFreshGame() {
 
       result.innerHTML = `
         <div class="mu-result-card result-card ${score >= 70 ? "good" : "caution"}">
-          <div class="mu-pill ${score >= 70 ? "mu-pill-success" : "mu-pill-warning"}">Purchase decision score</div>
+          <div class="mu-pill ${score >= 70 ? "mu-pill-success" : "mu-pill-warning"}">Your score</div>
           <div class="mu-result-value">${score}/100</div>
           <div class="mu-budgetlab-meter"><div class="mu-budgetlab-meter-fill" style="--value:${score}%"></div></div>
-          <div class="mu-budgetlab-meter-labels"><span>Wait</span><span>Adjust</span><span>Buy</span></div>
+          <div class="mu-budgetlab-meter-labels"><span>Wait</span><span>Rethink</span><span>Buy</span></div>
           <div class="mu-budgetlab-result-grid">
-            <div class="mu-budgetlab-result-stat"><strong>${decisionLabel}</strong><span>recommendation</span></div>
-            <div class="mu-budgetlab-result-stat"><strong>$${amountLeft.toFixed(2)}</strong><span>left after purchase</span></div>
-            <div class="mu-budgetlab-result-stat"><strong>${Number.isFinite(percentSavings) ? percentSavings.toFixed(1) + "%" : "N/A"}</strong><span>of savings used</span></div>
+            <div class="mu-budgetlab-result-stat"><strong>${decisionLabel}</strong><span>our suggestion</span></div>
+            <div class="mu-budgetlab-result-stat"><strong>$${amountLeft.toFixed(2)}</strong><span>savings left if you buy it</span></div>
+            <div class="mu-budgetlab-result-stat"><strong>${Number.isFinite(percentSavings) ? percentSavings.toFixed(1) + "%" : "N/A"}</strong><span>of your savings it uses</span></div>
           </div>
           <div class="mu-budgetlab-decision">
             <h3>${escapeHtml(itemName)}</h3>
-            <p><strong>Recommended decision:</strong> ${recommendation}</p>
-            <p><strong>Savings impact:</strong> ${amountLeft >= 0 ? `You would have $${amountLeft.toFixed(2)} left after buying it.` : `You are short by $${Math.abs(amountLeft).toFixed(2)}.`}</p>
-            <p><strong>Opportunity cost:</strong> Money used here cannot also go toward savings goals, emergencies, or other priorities.</p>
-            <p><strong>Why this recommendation?</strong> ${bigPurchaseExplanation(recommendation)}</p>
+            <p><strong>Suggestion:</strong> ${recommendation}</p>
+            <p><strong>After buying:</strong> ${amountLeft >= 0 ? `You'd have $${amountLeft.toFixed(2)} left.` : `You'd be short $${Math.abs(amountLeft).toFixed(2)}.`}</p>
+            <p><strong>Why:</strong> ${bigPurchaseExplanation(recommendation)} Remember, money spent here can't also go to savings or something else later.</p>
           </div>
-          <h3>Warning signs selected or detected</h3>
+          <h3>Things to watch out for</h3>
           ${warningList}
-          <p><strong>Reflection:</strong> If you waited 7 days, would this still feel like the best use of the money?</p>
           <div class="mu-result-note">These tools provide educational estimates only and are not financial, legal, tax, investing, banking, or career advice.</div>
         </div>
       `;
@@ -14560,15 +14536,15 @@ function getFreshGame() {
         <section class="mu-safetylab-card">
           <div class="mu-safetylab-header">
             <div class="mu-safetylab-title">
-              <div class="mu-pill mu-pill-success">Safety/Economics Lab</div>
-              <h2>Price Pressure Simulator</h2>
-              <p>Explore why prices can rise, fall, or stay stable when demand, supply, hype, production cost, and competition change.</p>
+              <div class="mu-pill mu-pill-success">Economics</div>
+              <h2>Why Prices Change</h2>
+              <p>Ever wonder why some things get pricey? Move the sliders and watch what pushes a price up or down.</p>
             </div>
-            <div class="mu-safetylab-mini-card"><strong>Use this for:</strong><br>Sneakers, concert tickets, gas prices, gaming consoles, food items, or other student examples.</div>
+            <div class="mu-safetylab-mini-card"><strong>Try it with:</strong><br>Sneakers, concert tickets, gas, gaming consoles, or food.</div>
           </div>
 
           <div class="mu-safetylab-section">
-            <h3>Scenario examples</h3>
+            <h3>Try an example</h3>
             <div class="mu-safetylab-scenario-grid">
               <button class="mu-safetylab-scenario" type="button" onclick="document.getElementById('sd-demand').value='85';document.getElementById('sd-supply').value='25';document.getElementById('sd-hype').value='80';document.getElementById('sd-costs').value='30';document.getElementById('sd-comp').value='20'">Sneakers</button>
               <button class="mu-safetylab-scenario" type="button" onclick="document.getElementById('sd-demand').value='95';document.getElementById('sd-supply').value='20';document.getElementById('sd-hype').value='90';document.getElementById('sd-costs').value='40';document.getElementById('sd-comp').value='10'">Concert tickets</button>
@@ -14579,24 +14555,24 @@ function getFreshGame() {
           </div>
 
           <div class="mu-safetylab-section">
-            <h3>Adjust the price pressure controls</h3>
+            <h3>Move the sliders</h3>
             <div class="form-grid">
-              ${rangeInput("Demand", "sd-demand", 50)}
-              ${rangeInput("Supply", "sd-supply", 50)}
-              ${rangeInput("Hype / popularity", "sd-hype", 20)}
-              ${rangeInput("Production cost", "sd-costs", 10)}
-              ${rangeInput("Competition", "sd-comp", 20)}
+              ${rangeInput("How many people want it (demand)", "sd-demand", 50)}
+              ${rangeInput("How much there is (supply)", "sd-supply", 50)}
+              ${rangeInput("How hyped it is", "sd-hype", 20)}
+              ${rangeInput("Cost to make it", "sd-costs", 10)}
+              ${rangeInput("How many sell it (competition)", "sd-comp", 20)}
             </div>
           </div>
 
           <div class="mu-safetylab-section">
-            <h3>Price pressure meter</h3>
-            <p>The result shows whether the price is likely to fall, stay stable, or rise in this simplified educational model.</p>
+            <h3>Which way does the price go?</h3>
+            <p>The result shows if the price is likely to drop, hold steady, or go up.</p>
             <div class="mu-safetylab-meter"><div class="mu-safetylab-meter-fill" style="--value:0%"></div></div>
-            <div class="mu-safetylab-meter-labels"><span>Price likely falls</span><span>Stable</span><span>Price likely rises</span></div>
+            <div class="mu-safetylab-meter-labels"><span>Price drops</span><span>Steady</span><span>Price rises</span></div>
           </div>
 
-          <div class="actions"><button class="btn green" onclick="calculateSupplyDemand()">Calculate Price Pressure</button></div>
+          <div class="actions"><button class="btn green" onclick="calculateSupplyDemand()">See What Happens</button></div>
           <div id="sd-result"></div>
         </section>
       `);
@@ -14614,22 +14590,22 @@ function getFreshGame() {
       const comp = getNum("sd-comp");
       const price = Math.max(5, 50 + demand * 0.6 - supply * 0.45 + hype * 0.4 + costs * 0.7 - comp * 0.35);
       const pressure = Math.max(0, Math.min(100, Math.round(price)));
-      const label = price >= 75 ? "Price likely rises" : price <= 40 ? "Price likely falls" : "Price likely stable";
+      const label = price >= 75 ? "Price likely rises" : price <= 40 ? "Price likely drops" : "Price likely steady";
       document.getElementById("sd-result").innerHTML = `
         <div class="mu-result-card result-card ${price >= 75 ? "caution" : "good"}">
-          <div class="mu-pill ${price >= 75 ? "mu-pill-warning" : "mu-pill-success"}">Estimated price pressure</div>
+          <div class="mu-pill ${price >= 75 ? "mu-pill-warning" : "mu-pill-success"}">Estimated price</div>
           <div class="mu-result-value">$${price.toFixed(0)}</div>
           <div class="mu-safetylab-meter"><div class="mu-safetylab-meter-fill" style="--value:${pressure}%"></div></div>
-          <div class="mu-safetylab-meter-labels"><span>Price likely falls</span><span>Stable</span><span>Price likely rises</span></div>
+          <div class="mu-safetylab-meter-labels"><span>Price drops</span><span>Steady</span><span>Price rises</span></div>
           <div class="mu-safetylab-result-grid">
-            <div class="mu-safetylab-stat"><strong>${label}</strong><span>simplified signal</span></div>
-            <div class="mu-safetylab-stat"><strong>${demand}</strong><span>demand level</span></div>
-            <div class="mu-safetylab-stat"><strong>${supply}</strong><span>supply level</span></div>
+            <div class="mu-safetylab-stat"><strong>${label}</strong><span>what's likely</span></div>
+            <div class="mu-safetylab-stat"><strong>${demand}</strong><span>demand (people who want it)</span></div>
+            <div class="mu-safetylab-stat"><strong>${supply}</strong><span>supply (how much there is)</span></div>
           </div>
           <div class="mu-safetylab-explain">
             <h3>What this means</h3>
-            <p>Higher demand, hype, and production costs push prices up. Higher supply and competition push prices down.</p>
-            <p><strong>Reflection:</strong> Think of a product you buy. Which force affects its price most: demand, supply, hype, cost, or competition?</p>
+            <p>When lots of people want something but there isn't much of it, the price goes up. When there's plenty to go around, the price goes down.</p>
+            <p><strong>Think about it:</strong> Pick something you buy. What pushes its price the most — demand, supply, hype, cost, or competition?</p>
           </div>
           <div class="mu-result-note">These tools provide educational estimates only. They are not financial, legal, tax, investing, banking, or career advice.</div>
         </div>`;
@@ -14649,29 +14625,27 @@ function getFreshGame() {
         <section class="mu-moneylab-card">
           <div class="mu-moneylab-header">
             <div>
-              <div class="mu-pill mu-pill-success">Money Lab • Tradeoff Visualizer</div>
+              <div class="mu-pill mu-pill-success">Practice Game</div>
               <h2>Spending Decision Game</h2>
-              <p>Practice quick spending decisions by comparing impulse, delay, and skip choices.</p>
+              <p>Quick practice for real money moments. Read the situation and pick what you'd do.</p>
             </div>
-            <div class="mu-moneylab-side-note"><strong>Decision score:</strong><br>The score reflects choices inside this practice game only.</div>
+            <div class="mu-moneylab-side-note"><strong>Your score:</strong><br>It only counts choices in this game — it's just for fun and practice.</div>
           </div>
           <div class="mu-moneylab-section">
-            <h3>Scenario</h3>
+            <h3>What would you do?</h3>
             <div class="mu-moneylab-insight"><p>${current}</p></div>
           </div>
           <div class="mu-moneylab-tradeoff-grid">
-            <button class="mu-moneylab-scenario" onclick="chooseSpend(1, 'Buying now can be fine, but impulse choices can hurt bigger goals. Try asking what this purchase costs you later.')"><strong>Buy now</strong><span>Fast happiness, possible goal pressure</span></button>
-            <button class="mu-moneylab-scenario" onclick="chooseSpend(3, 'Strong choice. Comparing first protects options and lowers regret risk.')"><strong>Compare or save first</strong><span>Best decision-quality score</span></button>
-            <button class="mu-moneylab-scenario" onclick="chooseSpend(2, 'Skipping can protect bigger goals, but balance matters too.')"><strong>Skip it</strong><span>Protects cash and goals</span></button>
+            <button class="mu-moneylab-scenario" onclick="chooseSpend(1, 'Buying right away feels good, but quick choices can get in the way of bigger goals.')"><strong>Buy now</strong><span>Feels good fast</span></button>
+            <button class="mu-moneylab-scenario" onclick="chooseSpend(3, 'Nice. Taking a moment to compare or save first usually means fewer regrets.')"><strong>Wait or compare first</strong><span>Usually the smartest move</span></button>
+            <button class="mu-moneylab-scenario" onclick="chooseSpend(2, 'Skipping keeps your money for bigger goals — just make sure to treat yourself sometimes too.')"><strong>Skip it</strong><span>Keeps your money</span></button>
           </div>
           <div id="spend-result">
             <div class="mu-result-card result-card good">
-              <div class="mu-pill mu-pill-success">Decision score</div>
+              <div class="mu-pill mu-pill-success">Your score</div>
               <div class="mu-result-value">${spendingScore}</div>
               <div class="mu-moneylab-insight">
-                <p><strong>What this means:</strong> Choose an option to get feedback.</p>
-                <p><strong>Why it matters:</strong> Small spending choices train the habit of pausing before impulse purchases.</p>
-                <p><strong>Reflection:</strong> Which choice protects your future goals without making life feel too strict?</p>
+                <p>Pick an option above to see what happens.</p>
               </div>
             </div>
           </div>
@@ -14686,18 +14660,14 @@ function getFreshGame() {
       const meter = Math.min(100, spendingScore * 12);
       document.getElementById("spend-result").innerHTML = `
         <div class="mu-result-card result-card good">
-          <div class="mu-pill mu-pill-success">Decision score</div>
+          <div class="mu-pill mu-pill-success">Your score</div>
           <div class="mu-result-value">${spendingScore}</div>
           <div class="mu-moneylab-meter"><div class="mu-moneylab-meter-fill" style="--value:${meter}%"></div></div>
-          <div class="mu-moneylab-meter-labels"><span>Impulse</span><span>Thinking</span><span>Stronger habits</span></div>
+          <div class="mu-moneylab-meter-labels"><span>Quick to spend</span><span>Thinking it over</span><span>Smart habits</span></div>
           <div class="mu-moneylab-insight">
             <h3>What this means</h3>
             <p>${text}</p>
-            <p><strong>Why it matters:</strong> Spending decisions are tradeoffs between cash, happiness, goals, and regret risk.</p>
-            <p><strong>Smart next move:</strong> Use a 24-hour pause for non-urgent wants.</p>
-            <p><strong>Try changing this:</strong> Compare the price with your savings goal before deciding.</p>
-            <p><strong>Related review:</strong> Budget Lab and Big Purchase Decision Score.</p>
-            <p><strong>Reflection:</strong> Was this purchase a need, a want, or a pressure-based choice?</p>
+            <p><strong>A good trick:</strong> For things you want but don't need, wait a day before buying. If you still want it tomorrow, then decide.</p>
           </div>
         </div>`;
     }
