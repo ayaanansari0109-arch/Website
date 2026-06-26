@@ -10246,7 +10246,7 @@ a:focus-visible {
     const navItems = ["Home", "Course Overview", "Dashboard", "Curriculum", "Tools", "Flashcards", "Progress", "Badges", "Final Game", "Parents", "About", "FAQ", "Contact", "Login"];
 
     let page = "Home";
-    const protectedPages = ["Dashboard", "Curriculum", "Quiz Review", "Tools", "Flashcards", "Progress", "Badges", "Final Game", "W!SE Prep"];
+    const protectedPages = [];
     let isLoggedIn = localStorage.getItem("moneyUnlockedLoggedIn") === "true";
     let hasPaid = localStorage.getItem("moneyUnlockedPaid") === "true";
     let intendedPage = "Dashboard";
@@ -11643,23 +11643,15 @@ function getFreshGame() {
 
     function renderNav() {
       const nav = document.getElementById("nav");
-      const publicItems = [
+      const visibleItems = [
         { label: "Home", page: "Home" },
-        { label: "Course", page: "Course Overview" },
-        { label: "Sample", page: "Sample Lesson" },
-        { label: "Buy", page: "Buy" },
-        { label: "Parents", page: "Parents" },
-        { label: "FAQ", page: "FAQ" },
-        { label: "Login", page: "Login" }
-      ];
-      const studentItems = [
         { label: "Dashboard", page: "Dashboard", group: ["Dashboard"] },
         { label: "Learn", page: "Curriculum", group: ["Curriculum"] },
         { label: "Practice", page: "Tools", group: ["Tools", "Flashcards", "Quiz Review", "W!SE Prep", "Final Game"] },
         { label: "Progress", page: "Progress", group: ["Progress", "Badges"] },
-        { label: "Logout", page: "Logout", logout: true }
+        { label: "Parents", page: "Parents" },
+        { label: "FAQ", page: "FAQ" }
       ];
-      const visibleItems = hasPaid && isLoggedIn ? studentItems : publicItems;
       nav.innerHTML = visibleItems.map(item => {
         const isLogout = Boolean(item.logout);
         const isActive = !isLogout && (item.group ? item.group.includes(page) : page === item.page);
@@ -12229,10 +12221,9 @@ function getFreshGame() {
               <h1>An expanded financial literacy curriculum for real-life decisions.</h1>
               <p>MoneyUnlocked is a multi-module learning path covering budgeting, saving, banking, credit, debt, income, taxes, investing basics, scams, smart shopping, business, economics, global money, and long-term planning.</p>
               <div class="mu-hero-actions">
-                <button class="mu-btn mu-btn-primary" onclick="goToPage('Payment')">Start demo access</button>
-                <button class="mu-btn mu-btn-secondary" onclick="goToPage('Sample Lesson')">Preview sample lesson</button>
+                <button class="mu-btn mu-btn-primary" onclick="goToPage('Curriculum')">Start the course free</button>
               </div>
-              <div class="mu-trust-note"><span class="mu-trust-dot"></span>Educational-only. No product recommendations or guaranteed outcomes.</div>
+              <div class="mu-trust-note"><span class="mu-trust-dot"></span>Free, open to everyone, no account needed. No product recommendations or guaranteed outcomes.</div>
             </div>
             <aside class="mu-command-card">
               <div class="mu-pill">Current course build</div>
@@ -12399,13 +12390,12 @@ function getFreshGame() {
             <div class="mu-hero-copy">
               <div class="mu-pill mu-pill-success">Free preview • Grades 6–12</div>
               <h1>Money skills your kid will actually use.</h1>
-              <p>MoneyUnlocked teaches budgeting, saving, credit, and real money decisions through lessons, quizzes, flashcards, and parent progress tracking. This is an early, free preview — try it and tell us what to fix.</p>
+              <p>MoneyUnlocked teaches budgeting, saving, credit, and real money decisions through lessons, quizzes, flashcards, and progress tracking. This is an early, free preview, open to everyone — no account needed. Try it and tell us what to fix.</p>
               <div class="mu-hero-actions">
-                <button class="mu-btn mu-btn-ghost" onclick="goToPage('Sample Lesson')">Try a lesson, no signup</button>
-                <button class="mu-btn mu-btn-primary" onclick="selectDemoPlan('family')">Try it free</button>
-                <button class="mu-btn mu-btn-secondary" onclick="selectDemoPlan('group')">Try it for a class/group</button>
+                <button class="mu-btn mu-btn-primary" onclick="goToPage('Curriculum')">Start the course free</button>
+                <button class="mu-btn mu-btn-secondary" onclick="goToPage('Parents')">Parent & Teacher Guide</button>
               </div>
-              <div class="mu-trust-note"><span class="mu-trust-dot"></span>Free preview. No payment, no cost. Educational-only — no investing advice, no wealth promises.</div>
+              <div class="mu-trust-note"><span class="mu-trust-dot"></span>Free preview. No account, no payment, no cost. Educational-only — no investing advice, no wealth promises.</div>
             </div>
 
             <aside class="mu-command-card" aria-label="MoneyUnlocked command center preview">
@@ -12454,7 +12444,7 @@ function getFreshGame() {
               <div class="mu-section-heading">
                 <div class="mu-pill mu-pill-success">Parent-safe learning</div>
                 <h2>Clear progress visibility without hype.</h2>
-                <p>Parents can create student profiles, generate access codes, and review learning progress while the course stays honest about being educational-only.</p>
+                <p>The course is open to every student with no account needed. Parents who want to track more than one kid separately can optionally create a free profile to generate access codes and review learning progress.</p>
               </div>
               <div class="mu-grid-3">
                 ${parentBenefits.map(item => `
@@ -12466,8 +12456,8 @@ function getFreshGame() {
                 `).join("")}
               </div>
               <div class="mu-public-actions">
-                <button class="mu-btn mu-btn-primary" onclick="selectDemoPlan('family')">Start Standard Demo</button>
-                <button class="mu-btn mu-btn-secondary" onclick="goToPage('Parents')">See parent info</button>
+                <button class="mu-btn mu-btn-primary" onclick="goToPage('Curriculum')">Start the course free</button>
+                <button class="mu-btn mu-btn-secondary" onclick="goToPage('Parents')">Optional: track multiple kids</button>
               </div>
             </div>
           </section>
@@ -12551,12 +12541,12 @@ function getFreshGame() {
 
           <section class="mu-public-final-cta">
             <div class="mu-section-heading">
-              <div class="mu-pill">Ready to preview?</div>
-              <h2>Start with demo access or explore the curriculum first.</h2>
-              <p>MoneyUnlocked helps students practice money skills in a safe educational environment, with parent visibility and no wealth promises.</p>
+              <div class="mu-pill">Ready to start?</div>
+              <h2>Jump into the course or explore the curriculum first.</h2>
+              <p>MoneyUnlocked helps students practice money skills in a safe educational environment, with optional parent visibility and no wealth promises.</p>
             </div>
             <div class="mu-public-actions">
-              <button class="mu-btn mu-btn-primary" onclick="selectDemoPlan('family')">Start Standard Demo</button><button class="mu-btn mu-btn-secondary" onclick="selectDemoPlan('group')">Start Group Demo</button>
+              <button class="mu-btn mu-btn-primary" onclick="goToPage('Curriculum')">Start the course free</button>
               <button class="mu-btn mu-btn-secondary" onclick="goToPage('Course Overview')">Preview curriculum</button>
               <button class="mu-btn mu-btn-ghost" onclick="goToPage('FAQ')">Read FAQ</button>
             </div>
@@ -15444,13 +15434,13 @@ function renderParents() {
             <div class="mu-hero-copy">
               <div class="mu-pill mu-pill-success">For parents and guardians</div>
               <h1>A safer way for students to practice money decisions.</h1>
-              <p>MoneyUnlocked gives students structured financial literacy lessons, quizzes, flashcards, tools, and progress tracking while staying clear that it is not personalized financial, legal, tax, investment, banking, or career advice.</p>
+              <p>MoneyUnlocked gives students structured financial literacy lessons, quizzes, flashcards, tools, and progress tracking while staying clear that it is not personalized financial, legal, tax, investment, banking, or career advice. The course is free and open to any student right now &mdash; no account required.</p>
+              <p>If you want to track more than one kid's progress separately, you can optionally set up a free parent profile below.</p>
               <div class="mu-hero-actions">
-                <button class="mu-btn mu-btn-primary" onclick="goToPage('Parent Setup')">Create parent demo account</button>
-                <button class="mu-btn mu-btn-secondary" onclick="goToPage('Payment')">View access options</button>
-                <button class="mu-btn mu-btn-ghost" onclick="goToPage('Course Overview')">Preview curriculum</button>
+                <button class="mu-btn mu-btn-primary" onclick="goToPage('Curriculum')">Start the course free</button>
+                <button class="mu-btn mu-btn-secondary" onclick="goToPage('Parent Setup')">Optional: create parent profile</button>
               </div>
-              <div class="mu-trust-note"><span class="mu-trust-dot"></span>Demo progress is stored in this browser. Clearing browser data may reset progress.</div>
+              <div class="mu-trust-note"><span class="mu-trust-dot"></span>Progress is stored in this browser. Clearing browser data may reset progress.</div>
             </div>
             <aside class="mu-command-card">
               <div class="mu-pill">Parent visibility preview</div>
@@ -15647,12 +15637,12 @@ function renderParents() {
             <div class="mu-hero-copy">
               <div class="mu-pill mu-pill-success">FAQ + trust center</div>
               <h1>Clear answers before students start learning.</h1>
-              <p>MoneyUnlocked is designed to be practical, parent-safe, and honest about what the demo does and does not do.</p>
+              <p>MoneyUnlocked is designed to be practical, parent-safe, and honest about what the course does and does not do.</p>
               <div class="mu-hero-actions">
-                <button class="mu-btn mu-btn-primary" onclick="goToPage('Payment')">Start demo access</button>
+                <button class="mu-btn mu-btn-primary" onclick="goToPage('Curriculum')">Start the course free</button>
                 <button class="mu-btn mu-btn-secondary" onclick="goToPage('Course Overview')">Preview curriculum</button>
               </div>
-              <div class="mu-trust-note"><span class="mu-trust-dot"></span>Educational-only. Demo progress is stored in this browser.</div>
+              <div class="mu-trust-note"><span class="mu-trust-dot"></span>Free, open to everyone. Progress is stored in this browser.</div>
             </div>
             <aside class="mu-command-card">
               <div class="mu-pill">Course snapshot</div>
